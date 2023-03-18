@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/lhyodo/projects/cpp/build",
+  "command": "/usr/bin/g++-10   -g -o CMakeFiles/MyProject.dir/main.cpp.o -c /home/lhyodo/projects/cpp/main.cpp",
+  "file": "/home/lhyodo/projects/cpp/main.cpp"
+}
+]
