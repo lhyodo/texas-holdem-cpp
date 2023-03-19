@@ -4,8 +4,9 @@
 #include "DisplayDeck.cpp"
 #include "FillHand.cpp"
 #include "IsPair.cpp"
+#include "IsFlush.cpp"
 
-const int DECK_SIZE = 20;
+const int DECK_SIZE = 52;
 const int HAND_SIZE = 2;
 const int COMMUNITY_SIZE = 5;
 
@@ -67,6 +68,13 @@ int main(int, char **)
     else if (you_have_pair >= 20)
     {
         std::cout << "you have a 4 of a kind! the best kind! \n";
+    }
+
+    // IsFlush
+    int you_have_flush = IsFlush(your_hand, community_cards, HAND_SIZE, COMMUNITY_SIZE);
+    if (you_have_flush > 0)
+    {
+        std::cout << "you have a *FLUSH* \n";
     }
 
     
