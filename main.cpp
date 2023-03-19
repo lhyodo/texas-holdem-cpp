@@ -5,8 +5,9 @@
 #include "FillHand.cpp"
 #include "IsPair.cpp"
 #include "IsFlush.cpp"
+#include "IsStraight.cpp"
 
-const int DECK_SIZE = 52;
+const int DECK_SIZE = 30;
 const int HAND_SIZE = 2;
 const int COMMUNITY_SIZE = 5;
 
@@ -78,13 +79,18 @@ int main(int, char **)
     }
 
     
-
+    // IsStraight
+    int you_have_straight = IsStraight(your_hand, community_cards, HAND_SIZE, COMMUNITY_SIZE);
+    if (you_have_straight == 1)
+    {
+        std::cout << "you have a |STRAIGHT| \n";
+    }
 
 
 
     // END, SHOW DECK AND RETURN 0
-    std::cout << "This is the final deck: \n";
-    DisplayDeck(deck, DECK_SIZE);
+    // std::cout << "This is the final deck: \n";
+    // DisplayDeck(deck, DECK_SIZE);
 
     std::cout << "Goodbye, cruel world!" << std::endl;
     return 0;
