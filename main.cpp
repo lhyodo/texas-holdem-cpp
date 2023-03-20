@@ -4,10 +4,11 @@
 #include "DisplayDeck.cpp"
 #include "FillHand.cpp"
 #include "IsPair.cpp"
+#include "IsDoublePair.cpp"
 #include "IsFlush.cpp"
 #include "IsStraight.cpp"
 
-const int DECK_SIZE = 30;
+const int DECK_SIZE = 22;
 const int HAND_SIZE = 2;
 const int COMMUNITY_SIZE = 5;
 
@@ -22,18 +23,18 @@ int main(int, char **)
     std::cout << "This is your hand: \n";
     DisplayHand(your_hand, HAND_SIZE);
 
-    std::cout << "your hand again: \n";
-    for (int i = 0; i < 2; ++i)
-    {
-        std::cout << your_hand[i] << std::endl;
-    }
+    // std::cout << "your hand again: \n";
+    // for (int i = 0; i < 2; ++i)
+    // {
+    //     std::cout << your_hand[i] << std::endl;
+    // }
 
 
 
-    int* dealer_hand = new int[HAND_SIZE];
-    FillHand(dealer_hand, deck, HAND_SIZE, DECK_SIZE);
-    std::cout << "This is the dealer's hand: \n";
-    DisplayHand(dealer_hand, HAND_SIZE);
+    // int* dealer_hand = new int[HAND_SIZE];
+    // FillHand(dealer_hand, deck, HAND_SIZE, DECK_SIZE);
+    // std::cout << "This is the dealer's hand: \n";
+    // DisplayHand(dealer_hand, HAND_SIZE);
 
     int* community_cards = new int[COMMUNITY_SIZE];
     FillHand(community_cards, deck, COMMUNITY_SIZE, DECK_SIZE);
@@ -41,35 +42,32 @@ int main(int, char **)
 
 
     // display board cards
-    std::cout << "This is the flop: \n";
+    // std::cout << "This is the flop: \n";
     for (int i = 0; i < 3; ++i)
     {
         DisplayCard(community_cards[i]);
     }
-    std::cout << "This is the turn: \n";
+    // std::cout << "This is the turn: \n";
     DisplayCard(community_cards[3]);
-    std::cout << "This is the river: \n";
+    // std::cout << "This is the river: \n";
     DisplayCard(community_cards[4]);
 
 
     // IsPair
     int you_have_pair = IsPair(your_hand, community_cards, HAND_SIZE, COMMUNITY_SIZE);
-    if (you_have_pair == 1)
+    if (you_have_pair > 0)
     {
-        std::cout << "you have a pair! \n";
+        std::cout << "you have a PAIR of " << you_have_pair << "'s \n";
     }
-    else if (you_have_pair == 2 || you_have_pair == 3)
+
+    // IsDoublePair
+    int* double_pair_ranks = new int[2];
+    int you_have_double_pair = IsDoublePair(your_hand, community_cards, HAND_SIZE, COMMUNITY_SIZE, double_pair_ranks);
+    if (you_have_double_pair > 0)
     {
-        std::cout << "you have a double pair! \n";
+        std::cout << "you have a DOUBLE PAIR of " << double_pair_ranks[0] << "'s and " << double_pair_ranks[1] << "'s \n";
     }
-    else if (you_have_pair >= 10 && you_have_pair < 20)
-    {
-        std::cout << "you have a 3 of a kind! \n";
-    }
-    else if (you_have_pair >= 20)
-    {
-        std::cout << "you have a 4 of a kind! the best kind! \n";
-    }
+
 
     // IsFlush
     int you_have_flush = IsFlush(your_hand, community_cards, HAND_SIZE, COMMUNITY_SIZE);

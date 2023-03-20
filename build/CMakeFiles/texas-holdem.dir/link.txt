@@ -1,0 +1,1 @@
+/usr/bin/g++-10 -g -rdynamic CMakeFiles/texas-holdem.dir/main.cpp.o -o texas-holdem 
