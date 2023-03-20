@@ -28,7 +28,7 @@ int IsDoublePair(int *hand, int *community_cards, int HAND_SIZE, int COMMUNITY_S
         }
         if (ranks[i] == 2)
         {
-            double_pair_ranks[num_of_pairs++] = i + 2;
+            double_pair_ranks[num_of_pairs++] = i;
         }
     }
 
@@ -39,7 +39,7 @@ int IsDoublePair(int *hand, int *community_cards, int HAND_SIZE, int COMMUNITY_S
     // return both sets in double_pair_ranks
     if (num_of_pairs == 0 || num_of_pairs == 1)
     {
-        return 0;
+        return -1;
     }
     return double_pair_ranks[0];
 }
