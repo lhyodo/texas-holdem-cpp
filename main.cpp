@@ -8,7 +8,7 @@
 #include "IsFlush.cpp"
 #include "IsStraight.cpp"
 
-const int DECK_SIZE = 22;
+const int DECK_SIZE = 52;
 const int HAND_SIZE = 2;
 const int COMMUNITY_SIZE = 5;
 
@@ -55,25 +55,25 @@ int main(int, char **)
 
     // IsPair
     int you_have_pair = IsPair(your_hand, community_cards, HAND_SIZE, COMMUNITY_SIZE);
-    if (you_have_pair > 0)
+    if (you_have_pair != -1)
     {
-        std::cout << "you have a PAIR of " << you_have_pair << "'s \n";
+        std::cout << "you have a PAIR of " << you_have_pair + 2 << "'s \n";
     }
 
     // IsDoublePair
     int* double_pair_ranks = new int[2];
     int you_have_double_pair = IsDoublePair(your_hand, community_cards, HAND_SIZE, COMMUNITY_SIZE, double_pair_ranks);
-    if (you_have_double_pair > 0)
+    if (you_have_double_pair != -1)
     {
-        std::cout << "you have a DOUBLE PAIR of " << double_pair_ranks[0] << "'s and " << double_pair_ranks[1] << "'s \n";
+        std::cout << "you have a DOUBLE PAIR of " << double_pair_ranks[0] + 2 << "'s and " << double_pair_ranks[1] + 2 << "'s \n";
     }
 
 
     // IsFlush
     int you_have_flush = IsFlush(your_hand, community_cards, HAND_SIZE, COMMUNITY_SIZE);
-    if (you_have_flush > 0)
+    if (you_have_flush != -1)
     {
-        std::cout << "you have a *FLUSH* \n";
+        std::cout << "you have a *FLUSH* of rank " << you_have_flush + 2 << " \n";
     }
 
     
