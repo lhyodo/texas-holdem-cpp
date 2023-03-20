@@ -3,6 +3,11 @@
 
 void DisplayCard(int card)
 {
+    // quotient of 0 indicates rank of 2
+    // quotient of 1 indicates rank of 3
+    // so forth
+    // quotient of 12 indicates rank of Ace
+    
     switch (card / 4)
     {
     case 0:
@@ -46,6 +51,11 @@ void DisplayCard(int card)
         break;
     }
 
+
+    // remainder of 0 indicates clubs
+    // remainder of 1 indicates diamonds
+    // remainder of 2 indicates hearts
+    // remainder of 3 indicates spades
     switch (card % 4)
     {
     case 0:
