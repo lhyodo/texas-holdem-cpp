@@ -34,11 +34,5 @@ int IsPair(int *hand, int *community_cards, int HAND_SIZE, int COMMUNITY_SIZE)
         }
     }
 
-    if (indicator == -1)
-    {
-        return 0;
-    }
-
-    indicator += 2;
     return indicator;
 }
