@@ -34,51 +34,50 @@ int IsFlush(int *hand, int *community_cards, int HAND_SIZE, int COMMUNITY_SIZE)
         std::cout << std::endl;
     }
 
+    int suits[4]{};
+    for (int i = 0; i < HAND_SIZE; ++i)
+    {
+        int c = hand[i];
+        c = c % 4;
+        suits[c] += 1;
+    }
 
-    int flush_counter {};
+    for (int i = 0; i < COMMUNITY_SIZE; ++i)
+    {
+        int c = community_cards[i];
+        c = c % 4;
+        suits[c] += 1;
+    }
+    std::cout << std::endl;
+    for (int i = 0; i < 4; ++i)
+    {
+        std::cout << suits[i] << " ";
+    }
+    std::cout << std::endl;
 
+    int flush_suit = -1;
+    for (int i = 0; i < 4; ++i)
+    {
+        if (suits[i] > 4)
+        {
+            flush_suit = i;
+        }
+    }
+    std::cout << "flush_suit equals " << flush_suit << std::endl;
 
+    int highest_rank = -1;
+    if (flush_suit != -1)
+    {
+        for (int i = 13; i >= 0; --i)
+        {
+            if (cards[i][flush_suit] == 1)
+            {
+                highest_rank = i;
+                break;
+            }
+        }
+    }
+    std::cout << "highest rank equals " << highest_rank << std::endl;
 
-
-
-
-    
-    // // suits
-    // int suits[4]{};
-    // for (int i = 0; i < HAND_SIZE; ++i)
-    // {
-    //     int c = hand[i];
-    //     c = c % 4;
-    //     suits[c] += 1;
-    // }
-
-    // for (int i = 0; i < COMMUNITY_SIZE; ++i)
-    // {
-    //     int c = community_cards[i];
-    //     c = c % 4;
-    //     suits[c] += 1;
-    // }
-
-
-
-    // std::cout << "IsFlush: \n";
-    // for (int i = 0; i < 4; ++i)
-    // {
-    //     std::cout << suits[i] << std::endl;
-    // }
-
-    // int indicator {};
-    // for (int i = 0; i < 4; ++i)
-    // {
-    //     if (suits[i] > 4)
-    //     {
-    //         ++indicator;
-    //     }
-    // }
-
-
-    // returns 0 if no flush
-    // otherwise return highest rank of flush
-    // std::cout << "This is the flush indicator: " << indicator << std::endl;
-    return 0;
+    return highest_rank;
 }
