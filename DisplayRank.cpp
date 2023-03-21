@@ -36,16 +36,16 @@ std::string DisplayRank(int num)
         return "10";
         break;
     case 9:
-        return "11";
+        return "Jack";
         break;
     case 10:
-        return "12";
+        return "Queen";
         break;
     case 11:
-        return "13";
+        return "King";
         break;
     case 12:
-        return "14";
+        return "Ace";
         break;
     }
 }
