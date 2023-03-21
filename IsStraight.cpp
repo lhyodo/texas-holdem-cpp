@@ -22,12 +22,12 @@ int IsStraight(int *hand, int *community_cards, int HAND_SIZE, int COMMUNITY_SIZ
         std::cout << ranks[i] << std::endl;
     }
 
-    int indicator{};
+    int indicator = -1;
     for (int i = 4; i < 13; ++i)
     {
         if (ranks[i] > 0 && ranks[i - 1] > 0 && ranks[i - 2] > 0 && ranks[i - 3] > 0 && ranks[i - 4] > 0)
         {
-            indicator = 1;
+            indicator = i;
         }
     }
 
