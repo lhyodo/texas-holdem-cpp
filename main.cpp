@@ -3,8 +3,11 @@
 #include "DisplayHand.cpp"
 #include "DisplayDeck.cpp"
 #include "DisplayRank.cpp"
+#include "GetHighestRank.cpp"
 #include "FillHand.cpp"
 #include "IsPair.cpp"
+#include "IsThreeKind.cpp"
+#include "IsFourKind.cpp"
 #include "IsDoublePair.cpp"
 #include "IsFlush.cpp"
 #include "IsStraight.cpp"
@@ -68,7 +71,19 @@ int main(int, char **)
     {
         std::cout << "you have a DOUBLE PAIR of " << DisplayRank(double_pair_ranks[0]) << "s and " << DisplayRank(double_pair_ranks[1]) << "s \n";
     }
-
+    
+    // IsThreeKind
+    int you_have_three_kind = IsThreeKind(your_hand, community_cards, HAND_SIZE, COMMUNITY_SIZE);
+    if (you_have_three_kind != -1)
+    {
+        std::cout << "you have a 3 OF A KIND of " << DisplayRank(you_have_three_kind) << "s \n";
+    }
+    // IsFourKind
+    int you_have_four_kind = IsFourKind(your_hand, community_cards, HAND_SIZE, COMMUNITY_SIZE);
+    if (you_have_four_kind != -1)
+    {
+        std::cout << "you have a 4 OF A KIND of " << DisplayRank(you_have_four_kind) << "s \n";
+    }
 
     // IsFlush
     int you_have_flush = IsFlush(your_hand, community_cards, HAND_SIZE, COMMUNITY_SIZE);
@@ -84,6 +99,12 @@ int main(int, char **)
     {
         std::cout << "you have a |STRAIGHT| of rank " << DisplayRank(you_have_straight) << std::endl;
     }
+    int sorted_array[7] {};
+    int your_high_card = GetHighestRank(your_hand, community_cards, HAND_SIZE, COMMUNITY_SIZE, sorted_array);
+    // if (you_have_pair == -1 && you_have_double_pair == -1 && you_have_flush == -1 && you_have_straight == -1)
+    // {
+        std::cout << "you have a high card of " << DisplayRank(your_high_card) << std::endl;
+    // }
 
 
 
