@@ -2,6 +2,7 @@
 #include <iostream>
 #include "DisplayHand.cpp"
 #include "DisplayDeck.cpp"
+#include "DisplayRank.cpp"
 #include "FillHand.cpp"
 #include "IsPair.cpp"
 #include "IsDoublePair.cpp"
@@ -57,7 +58,7 @@ int main(int, char **)
     int you_have_pair = IsPair(your_hand, community_cards, HAND_SIZE, COMMUNITY_SIZE);
     if (you_have_pair != -1)
     {
-        std::cout << "you have a PAIR of " << you_have_pair + 2 << "'s \n";
+        std::cout << "you have a PAIR of " << DisplayRank(you_have_pair) << "s \n";
     }
 
     // IsDoublePair
@@ -65,7 +66,7 @@ int main(int, char **)
     int you_have_double_pair = IsDoublePair(your_hand, community_cards, HAND_SIZE, COMMUNITY_SIZE, double_pair_ranks);
     if (you_have_double_pair != -1)
     {
-        std::cout << "you have a DOUBLE PAIR of " << double_pair_ranks[0] + 2 << "'s and " << double_pair_ranks[1] + 2 << "'s \n";
+        std::cout << "you have a DOUBLE PAIR of " << DisplayRank(double_pair_ranks[0]) << "s and " << DisplayRank(double_pair_ranks[1]) << "s \n";
     }
 
 
@@ -73,15 +74,15 @@ int main(int, char **)
     int you_have_flush = IsFlush(your_hand, community_cards, HAND_SIZE, COMMUNITY_SIZE);
     if (you_have_flush != -1)
     {
-        std::cout << "you have a *FLUSH* of rank " << you_have_flush + 2 << " \n";
+        std::cout << "you have a *FLUSH* of rank " << DisplayRank(you_have_flush) << std::endl;
     }
 
     
     // IsStraight
     int you_have_straight = IsStraight(your_hand, community_cards, HAND_SIZE, COMMUNITY_SIZE);
-    if (you_have_straight == 1)
+    if (you_have_straight != -1)
     {
-        std::cout << "you have a |STRAIGHT| \n";
+        std::cout << "you have a |STRAIGHT| of rank " << DisplayRank(you_have_straight) << std::endl;
     }
 
 
