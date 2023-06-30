@@ -13,10 +13,10 @@ int GetHighestRank(int *your_hand, int *community_cards, int HAND_SIZE, int COMM
         sorted_array[index++] = community_cards[i];
     }
 
-    for (int i = 0; i < 7; ++i)
+    for (int i = 0; i < HAND_SIZE + COMMUNITY_SIZE; ++i)
     {
         sorted_array[i] = sorted_array[i] / 4;
     }
-    QuickSort(sorted_array, 0, 6);
-    return sorted_array[6];
+    QuickSort(sorted_array, 0, HAND_SIZE + COMMUNITY_SIZE - 1);
+    return sorted_array[HAND_SIZE + COMMUNITY_SIZE - 1];
 }

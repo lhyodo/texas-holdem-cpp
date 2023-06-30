@@ -148,10 +148,19 @@ CMakeFiles/texas-holdem.dir/main.cpp.o: \
  /usr/include/c++/10/bits/ostream.tcc /usr/include/c++/10/istream \
  /usr/include/c++/10/bits/istream.tcc \
  /home/lhyodo/projects/texas-holdem-cpp/DisplayHand.cpp \
- /home/lhyodo/projects/texas-holdem-cpp/DisplayCard.cpp \
+ /home/lhyodo/projects/texas-holdem-cpp/GetCardString.cpp \
  /home/lhyodo/projects/texas-holdem-cpp/DisplayDeck.cpp \
+ /home/lhyodo/projects/texas-holdem-cpp/GetRankString.cpp \
+ /home/lhyodo/projects/texas-holdem-cpp/GetHighestRank.cpp \
+ /home/lhyodo/projects/texas-holdem-cpp/QuickSort.cpp \
+ /usr/include/c++/10/array /usr/include/c++/10/utility \
+ /usr/include/c++/10/bits/stl_relops.h \
  /home/lhyodo/projects/texas-holdem-cpp/FillHand.cpp \
  /home/lhyodo/projects/texas-holdem-cpp/IsPair.cpp \
+ /home/lhyodo/projects/texas-holdem-cpp/GetRank.cpp \
+ /home/lhyodo/projects/texas-holdem-cpp/GetSuit.cpp \
+ /home/lhyodo/projects/texas-holdem-cpp/IsThreeKind.cpp \
+ /home/lhyodo/projects/texas-holdem-cpp/IsFourKind.cpp \
  /home/lhyodo/projects/texas-holdem-cpp/IsDoublePair.cpp \
  /home/lhyodo/projects/texas-holdem-cpp/IsFlush.cpp \
  /home/lhyodo/projects/texas-holdem-cpp/IsStraight.cpp

@@ -1,12 +1,12 @@
 #include <iostream>
 #include <cstdlib>
 
-int IsFlush(int *hand, int *community_cards, int HAND_SIZE, int COMMUNITY_SIZE)
+int IsFlush(int *hand, int *community_cards, int HAND_SIZE, int COMMUNITY_SIZE, int *top_five_cards)
 {
     // gather data from hand and board cards and store into a rank array
     // ranks[0] is 2, ranks[12] is Ace
     int cards[13][4]{};
-
+    
     for (int i = 0; i < HAND_SIZE; ++i)
     {
         int rank = hand[i];
@@ -24,15 +24,15 @@ int IsFlush(int *hand, int *community_cards, int HAND_SIZE, int COMMUNITY_SIZE)
         suit = suit % 4;
         cards[rank][suit] += 1;
     }
-    std::cout << "IsFlush: " << std::endl;
-    for (int i = 0; i < 13; ++i)
-    {
-        for (int j = 0; j < 4; ++j)
-        {
-            std::cout << cards[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
+    // std::cout << "IsFlush: " << std::endl;
+    // for (int i = 0; i < 13; ++i)
+    // {
+    //     for (int j = 0; j < 4; ++j)
+    //     {
+    //         std::cout << cards[i][j] << " ";
+    //     }
+    //     std::cout << std::endl;
+    // }
 
     int suits[4]{};
     for (int i = 0; i < HAND_SIZE; ++i)
@@ -48,12 +48,12 @@ int IsFlush(int *hand, int *community_cards, int HAND_SIZE, int COMMUNITY_SIZE)
         c = c % 4;
         suits[c] += 1;
     }
-    std::cout << std::endl;
-    for (int i = 0; i < 4; ++i)
-    {
-        std::cout << suits[i] << " ";
-    }
-    std::cout << std::endl;
+    // std::cout << std::endl;
+    // for (int i = 0; i < 4; ++i)
+    // {
+    //     std::cout << suits[i] << " ";
+    // }
+    // std::cout << std::endl;
 
     int flush_suit = -1;
     for (int i = 0; i < 4; ++i)
@@ -63,7 +63,7 @@ int IsFlush(int *hand, int *community_cards, int HAND_SIZE, int COMMUNITY_SIZE)
             flush_suit = i;
         }
     }
-    std::cout << "flush_suit equals " << flush_suit << std::endl;
+    // std::cout << "flush_suit equals " << flush_suit << std::endl;
 
     int highest_rank = -1;
     if (flush_suit != -1)
@@ -77,7 +77,21 @@ int IsFlush(int *hand, int *community_cards, int HAND_SIZE, int COMMUNITY_SIZE)
             }
         }
     }
-    std::cout << "highest rank equals " << highest_rank << std::endl;
+    
+
+    // top_five_cards
+    int top_cards_index {};
+    for (int i = 13; i >= 0; --i)
+    {
+        if (flush_suit != -1)
+        {
+            if (cards[i][flush_suit] == 1)
+            {
+                top_five_cards[top_cards_index++] = i * 4 + flush_suit;
+            }
+        }
+    }
+
 
     return highest_rank;
 }
