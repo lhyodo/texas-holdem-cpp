@@ -1,7 +1,7 @@
 [
 {
-  "directory": "/home/lhyodo/projects/texas-holdem-cpp/build",
-  "command": "/usr/bin/g++-10   -g -o CMakeFiles/texas-holdem.dir/main.cpp.o -c /home/lhyodo/projects/texas-holdem-cpp/main.cpp",
-  "file": "/home/lhyodo/projects/texas-holdem-cpp/main.cpp"
+  "directory": "/home/lhyodo/projects/texas-holdem/build",
+  "command": "/usr/bin/g++-10   -g -o CMakeFiles/texas-holdem.dir/main.cpp.o -c /home/lhyodo/projects/texas-holdem/main.cpp",
+  "file": "/home/lhyodo/projects/texas-holdem/main.cpp"
 }
 ]

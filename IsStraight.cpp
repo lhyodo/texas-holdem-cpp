@@ -1,39 +1,47 @@
 #include <iostream>
-int IsStraight(int *hand, int *community_cards, int HAND_SIZE, int COMMUNITY_SIZE)
+#include "QuickSort.cpp"
+#include "GetRank.cpp"
+bool IsStraight(int *hand, int *community_cards, int HAND_SIZE, int COMMUNITY_SIZE, int *top_five_cards)
 {
-    int ranks[13]{};
 
-    for (int i = 0; i < HAND_SIZE; ++i)
+    int combined_cards[HAND_SIZE + COMMUNITY_SIZE]{};
+    CombineCards(hand, community_cards, HAND_SIZE, COMMUNITY_SIZE, top_five_cards);
+    QuickSort(combined_cards, 0, HAND_SIZE + COMMUNITY_SIZE - 1);
+
+    int ranks_sum[13]{};
+    for (int i = 0; i < HAND_SIZE + COMMUNITY_SIZE; ++i)
     {
-        int c = hand[i];
-        c = c / 4;
-        ranks[c] += 1;
+        int card = combined_cards[i];
+        int rank = GetRank(card);
+        ++ranks_sum[rank];
     }
 
-    for (int i = 0; i < COMMUNITY_SIZE; ++i)
+    bool is_straight = false;
+    int highest_rank_in_straight = -1;
+    for (int i = 12; i >= 0; --i)
     {
-        int c = community_cards[i];
-        c = c / 4;
-        ranks[c] += 1;
-    }
-    // std::cout << "IsStraight: \n";
-    // for (int i = 0; i < 13; ++i)
-    // {
-    //     std::cout << ranks[i] << std::endl;
-    // }
-
-    int indicator = -1;
-    for (int i = 4; i < 13; ++i)
-    {
-        if (ranks[i] > 0 && ranks[i - 1] > 0 && ranks[i - 2] > 0 && ranks[i - 3] > 0 && ranks[i - 4] > 0)
+        if (ranks_sum[i] > 0 && ranks_sum[i - 1] > 0 && ranks_sum[i - 2] > 0 && ranks_sum[i - 3] > 0 && ranks_sum[i - 4] > 0)
         {
-            indicator = i;
+            highest_rank_in_straight = i;
+            is_straight = true;
+            break;
         }
     }
-    if (ranks[12] > 0 && ranks[0] > 0 && ranks[1] > 0 && ranks[2] > 0 && ranks[3] > 0)
+    if (is_straight == false)
     {
-        indicator = 3;
+        return false;
     }
 
-    return indicator;
+    for (int i = HAND_SIZE + COMMUNITY_SIZE - 1; i >= 0; --i)
+    {
+        for (int j = 0; j < 5; ++j)
+        {
+            if (GetRank(combined_cards[i]) == highest_rank_in_straight - j)
+            {
+                top_five_cards[j] = combined_cards[i];
+            }
+        }
+    }
+
+    return is_straight;
 }

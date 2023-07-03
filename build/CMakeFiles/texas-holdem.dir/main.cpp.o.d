@@ -1,6 +1,6 @@
 CMakeFiles/texas-holdem.dir/main.cpp.o: \
- /home/lhyodo/projects/texas-holdem-cpp/main.cpp \
- /usr/include/stdc-predef.h /usr/include/c++/10/cstdlib \
+ /home/lhyodo/projects/texas-holdem/main.cpp /usr/include/stdc-predef.h \
+ /usr/include/c++/10/cstdlib \
  /usr/include/x86_64-linux-gnu/c++/10/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/10/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -147,20 +147,37 @@ CMakeFiles/texas-holdem.dir/main.cpp.o: \
  /usr/include/c++/10/bits/basic_ios.tcc \
  /usr/include/c++/10/bits/ostream.tcc /usr/include/c++/10/istream \
  /usr/include/c++/10/bits/istream.tcc \
- /home/lhyodo/projects/texas-holdem-cpp/DisplayHand.cpp \
- /home/lhyodo/projects/texas-holdem-cpp/GetCardString.cpp \
- /home/lhyodo/projects/texas-holdem-cpp/DisplayDeck.cpp \
- /home/lhyodo/projects/texas-holdem-cpp/GetRankString.cpp \
- /home/lhyodo/projects/texas-holdem-cpp/GetHighestRank.cpp \
- /home/lhyodo/projects/texas-holdem-cpp/QuickSort.cpp \
+ /home/lhyodo/projects/texas-holdem/DisplayHand.cpp \
+ /home/lhyodo/projects/texas-holdem/GetCardString.cpp \
+ /home/lhyodo/projects/texas-holdem/DisplayDeck.cpp \
+ /home/lhyodo/projects/texas-holdem/GetRankString.cpp \
+ /home/lhyodo/projects/texas-holdem/CombineCards.cpp \
+ /home/lhyodo/projects/texas-holdem/QuickSort.cpp \
  /usr/include/c++/10/array /usr/include/c++/10/utility \
  /usr/include/c++/10/bits/stl_relops.h \
- /home/lhyodo/projects/texas-holdem-cpp/FillHand.cpp \
- /home/lhyodo/projects/texas-holdem-cpp/IsPair.cpp \
- /home/lhyodo/projects/texas-holdem-cpp/GetRank.cpp \
- /home/lhyodo/projects/texas-holdem-cpp/GetSuit.cpp \
- /home/lhyodo/projects/texas-holdem-cpp/IsThreeKind.cpp \
- /home/lhyodo/projects/texas-holdem-cpp/IsFourKind.cpp \
- /home/lhyodo/projects/texas-holdem-cpp/IsDoublePair.cpp \
- /home/lhyodo/projects/texas-holdem-cpp/IsFlush.cpp \
- /home/lhyodo/projects/texas-holdem-cpp/IsStraight.cpp
+ /home/lhyodo/projects/texas-holdem/FillHand.cpp \
+ /usr/include/c++/10/random /usr/include/c++/10/cmath /usr/include/math.h \
+ /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+ /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
+ /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
+ /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+ /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
+ /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
+ /usr/include/c++/10/limits /usr/include/c++/10/bits/random.h \
+ /usr/include/c++/10/vector /usr/include/c++/10/bits/stl_uninitialized.h \
+ /usr/include/c++/10/bits/stl_vector.h \
+ /usr/include/c++/10/bits/stl_bvector.h \
+ /usr/include/c++/10/bits/vector.tcc \
+ /usr/include/c++/10/bits/uniform_int_dist.h \
+ /usr/include/x86_64-linux-gnu/c++/10/bits/opt_random.h \
+ /usr/include/c++/10/bits/random.tcc /usr/include/c++/10/numeric \
+ /usr/include/c++/10/bits/stl_numeric.h \
+ /home/lhyodo/projects/texas-holdem/IsPair.cpp \
+ /home/lhyodo/projects/texas-holdem/GetRank.cpp \
+ /home/lhyodo/projects/texas-holdem/GetSuit.cpp \
+ /home/lhyodo/projects/texas-holdem/IsDoublePair.cpp \
+ /home/lhyodo/projects/texas-holdem/IsFlush.cpp \
+ /home/lhyodo/projects/texas-holdem/IsStraight.cpp

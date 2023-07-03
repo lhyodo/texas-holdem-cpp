@@ -1,4 +1,7 @@
 
+#ifndef GETCARDSTRING
+#define GETCARDSTRING
+
 #include <iostream>
 
 std::string GetCardString(int card_raw)
@@ -73,3 +76,4 @@ std::string GetCardString(int card_raw)
     }
     return str;
 }
+#endif

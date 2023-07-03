@@ -1,9 +1,11 @@
+#ifndef QUICKSORT
+#define QUICKSORT
+
+
 #include <stdio.h>
 #include <iostream>
 #include <array>
 
-int Partition(int *arr, int low, int high);
-void QuickSort(int *arr, int low, int high);
 
 int Partition(int *arr, int low, int high)
 {
@@ -51,3 +53,4 @@ void QuickSort(int *arr, int low, int high)
     }
     return;
 }
+#endif

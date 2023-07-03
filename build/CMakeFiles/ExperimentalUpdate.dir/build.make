@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lhyodo/projects/texas-holdem-cpp
+CMAKE_SOURCE_DIR = /home/lhyodo/projects/texas-holdem
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lhyodo/projects/texas-holdem-cpp/build
+CMAKE_BINARY_DIR = /home/lhyodo/projects/texas-holdem/build
 
 # Utility rule file for ExperimentalUpdate.
 
@@ -82,6 +82,6 @@ CMakeFiles/ExperimentalUpdate.dir/clean:
 .PHONY : CMakeFiles/ExperimentalUpdate.dir/clean
 
 CMakeFiles/ExperimentalUpdate.dir/depend:
-	cd /home/lhyodo/projects/texas-holdem-cpp/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lhyodo/projects/texas-holdem-cpp /home/lhyodo/projects/texas-holdem-cpp /home/lhyodo/projects/texas-holdem-cpp/build /home/lhyodo/projects/texas-holdem-cpp/build /home/lhyodo/projects/texas-holdem-cpp/build/CMakeFiles/ExperimentalUpdate.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lhyodo/projects/texas-holdem/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lhyodo/projects/texas-holdem /home/lhyodo/projects/texas-holdem /home/lhyodo/projects/texas-holdem/build /home/lhyodo/projects/texas-holdem/build /home/lhyodo/projects/texas-holdem/build/CMakeFiles/ExperimentalUpdate.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ExperimentalUpdate.dir/depend
 

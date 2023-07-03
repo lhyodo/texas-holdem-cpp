@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/lhyodo/projects/texas-holdem-cpp/main.cpp" "CMakeFiles/texas-holdem.dir/main.cpp.o" "gcc" "CMakeFiles/texas-holdem.dir/main.cpp.o.d"
+  "/home/lhyodo/projects/texas-holdem/main.cpp" "CMakeFiles/texas-holdem.dir/main.cpp.o" "gcc" "CMakeFiles/texas-holdem.dir/main.cpp.o.d"
   )
 
 # Targets to which this target links.

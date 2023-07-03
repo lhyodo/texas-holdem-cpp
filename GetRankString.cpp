@@ -34,16 +34,16 @@ std::string GetRankString(int card_rank)
         return "10";
         break;
     case 9:
-        return "J";
+        return "Jack";
         break;
     case 10:
-        return "Q";
+        return "Queen";
         break;
     case 11:
-        return "K";
+        return "King";
         break;
     case 12:
-        return "A";
+        return "Ace";
         break;
     }
 }

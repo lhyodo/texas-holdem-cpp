@@ -4,8 +4,8 @@
 
 
 # Configuration directories and files
-SourceDirectory: /home/lhyodo/projects/texas-holdem-cpp
-BuildDirectory: /home/lhyodo/projects/texas-holdem-cpp/build
+SourceDirectory: /home/lhyodo/projects/texas-holdem
+BuildDirectory: /home/lhyodo/projects/texas-holdem/build
 
 # Where to place the cost data store
 CostDataFile: 
@@ -26,7 +26,7 @@ SubmitURL: http://
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "/usr/bin/cmake" "/home/lhyodo/projects/texas-holdem-cpp"
+ConfigureCommand: "/usr/bin/cmake" "/home/lhyodo/projects/texas-holdem"
 MakeCommand: /usr/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
 DefaultCTestConfigurationType: Release
 
@@ -44,7 +44,7 @@ SVNOptions:
 SVNUpdateOptions: 
 
 # Git options
-GITCommand: /usr/bin/git
+GITCommand: 
 GITInitSubmodules: 
 GITUpdateOptions: 
 GITUpdateCustom: 
@@ -57,9 +57,9 @@ P4UpdateOptions:
 P4UpdateCustom: 
 
 # Generic update command
-UpdateCommand: /usr/bin/git
+UpdateCommand: 
 UpdateOptions: 
-UpdateType: git
+UpdateType: 
 
 # Compiler info
 Compiler: /usr/bin/g++-10
