@@ -1,11 +1,13 @@
 #include <iostream>
 #include "QuickSort.cpp"
 #include "GetRank.cpp"
+#include "CombineCards.cpp"
+
 bool IsStraight(int *hand, int *community_cards, int HAND_SIZE, int COMMUNITY_SIZE, int *top_five_cards)
 {
 
     int combined_cards[HAND_SIZE + COMMUNITY_SIZE]{};
-    CombineCards(hand, community_cards, HAND_SIZE, COMMUNITY_SIZE, top_five_cards);
+    CombineCards(hand, community_cards, HAND_SIZE, COMMUNITY_SIZE, combined_cards);
     QuickSort(combined_cards, 0, HAND_SIZE + COMMUNITY_SIZE - 1);
 
     int ranks_sum[13]{};
@@ -42,6 +44,7 @@ bool IsStraight(int *hand, int *community_cards, int HAND_SIZE, int COMMUNITY_SI
             }
         }
     }
+    QuickSort(top_five_cards, 0, COMMUNITY_SIZE - 1);
 
     return is_straight;
 }
