@@ -176,20 +176,20 @@ class Dealer {
     return true;
   }
 
-  int assignPoints(Player &player) {
-    int points{};
+  void assignPoints(Player &player) {
 
     bool flag = isPair(player);
     if (flag) {
-      points = (1 + player.top_cards[0].getRank()) * 10;
-      for (int i = 2; i < player.TOP_SIZE; ++i) {
-        points += 1 + player.top_cards[i].getRank();
-      }
-      return points;
+      player.hand_points = (1 + player.top_cards[0].getRank()) * 10;
+      player.hand_points += 1 + player.top_cards[2].getRank();
     }
     else { // has nothing, return high card
-      return 1 + getHighestRank(player);
+      player.hand_points = 1 + getHighestRank(player);
     }
+  }
+
+  int tieBreaker(Player &player_one, Player &player_two) {
+
   }
 };
 #endif
