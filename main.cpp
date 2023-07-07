@@ -15,15 +15,15 @@ int main() {
   std::string input{};
   while (input != "quit") {
     // debug
-    // vect_of_players[0].hand[0] = 16;
-    // vect_of_players[0].hand[1] = 12;
-    // vect_of_players[1].hand[0] = 17;
-    // vect_of_players[1].hand[1] = 29;
-    // dealer.board[0] = 40;
-    // dealer.board[1] = 8;
-    // dealer.board[2] = 28;
-    // dealer.board[3] = 32;
-    // dealer.board[4] = 20;
+    vect_of_players[0].hand[0] = 37;
+    vect_of_players[0].hand[1] = 30;
+    vect_of_players[1].hand[0] = 17;
+    vect_of_players[1].hand[1] = 29;
+    dealer.board[0] = 40;
+    dealer.board[1] = 8;
+    dealer.board[2] = 28;
+    dealer.board[3] = 32;
+    dealer.board[4] = 20;
     // end debug
 
     // dealer.fillHand(vect_of_players[0]);
@@ -70,16 +70,26 @@ int main() {
       dealer.assignPoints(vect_of_players[0]);
       dealer.assignPoints(vect_of_players[1]);
 
-      std::cout << "Player has point value of " << vect_of_players[0].hand_points << "." << std::endl;
-      std::cout << "Computer has point value of " << vect_of_players[1].hand_points << "." << std::endl;
-      if (vect_of_players[0].hand_points < vect_of_players[1].hand_points) {
-        std::cout << "You lose." << std::endl;
-      }
+      std::cout << "Your hand has a point value of " << vect_of_players[0].hand_points << "." << std::endl;
+      std::cout << "Computer's hand has a point value of " << vect_of_players[1].hand_points << "." << std::endl;
       if (vect_of_players[0].hand_points > vect_of_players[1].hand_points) {
         std::cout << "You win." << std::endl;
       }
-      if (vect_of_players[0].hand_points == vect_of_players[0].hand_points) {
-        std::cout << "Tie." << std::endl;
+      if (vect_of_players[0].hand_points < vect_of_players[1].hand_points) {
+        std::cout << "You lose." << std::endl;
+      }
+      if (vect_of_players[0].hand_points == vect_of_players[1].hand_points) {
+        Player tie_winner{};
+        dealer.tieBreaker(vect_of_players[0], vect_of_players[1], tie_winner);
+        if (tie_winner.hand[0] == -1) { // -1 indicates complete tie
+          std::cout << "Tie." << std::endl;
+        }
+        if (tie_winner.equalHand(vect_of_players[0])) {
+          std::cout << "You win." << std::endl;
+        }
+        if (tie_winner.equalHand(vect_of_players[1])) {
+          std::cout << "You lose." << std::endl;
+        }
       }
 
       std::cout << "============================\n";
