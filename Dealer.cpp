@@ -150,46 +150,60 @@ class Dealer {
       return false;
     }
 
-    // Fill first 2 slots of top_five_cards with the pair in raw form
-    int top_cards_index = 0;
-    for (int i = 0; i < player.HAND_SIZE + BOARD_SIZE; ++i) {
-      if (top_cards_index == 2) {
+    // Fill first 2 slots of primary_cards with the pair in raw form
+    for (int i = 0, primary_cards_index = 0; i < player.HAND_SIZE + BOARD_SIZE; ++i) {
+      if (primary_cards_index == 2) {
         break;
       }
 
       if (combined[i].getRank() == pair_rank) {
-        player.top_cards[top_cards_index++] = combined[i];
+        player.primary_cards[primary_cards_index++] = combined[i];
       }
     }
 
-    // Fill last 3 slots of top_five_cards with highest 3 cards excluding the pair
-    for (int i = player.HAND_SIZE + BOARD_SIZE - 1; i >= 0; --i) {
-      if (top_cards_index == player.TOP_SIZE) {
+    // Fill 3 slots of secondary_cards with highest 3 cards excluding the pair
+    for (int i = player.HAND_SIZE + BOARD_SIZE - 1, secondary_cards_index = 0; i >= 0; --i) {
+      if (secondary_cards_index == 3) {
         break;
       }
-      if (player.top_cards[0] == combined[i] || player.top_cards[1] == combined[i]) {
+      if (player.primary_cards[0] == combined[i] || player.primary_cards[1] == combined[i]) {
         continue;
       } else {
-        player.top_cards[top_cards_index++] = combined[i];
+        player.secondary_cards[secondary_cards_index++] = combined[i];
       }
     }
     return true;
   }
 
   void assignPoints(Player &player) {
-
     bool flag = isPair(player);
     if (flag) {
-      player.hand_points = (1 + player.top_cards[0].getRank()) * 10;
-      player.hand_points += 1 + player.top_cards[2].getRank();
-    }
-    else { // has nothing, return high card
+      player.hand_points = (1 + player.primary_cards[0].getRank()) * 10;
+      player.hand_points += 1 + player.secondary_cards[0].getRank();
+    } else {  // has nothing, return high card
       player.hand_points = 1 + getHighestRank(player);
     }
   }
 
-  int tieBreaker(Player &player_one, Player &player_two) {
-
+  void tieBreaker(Player &player_one, Player &player_two, Player &result) {
+    for (int i = 0; i < player_one.TOP_SIZE; ++i) {
+      if (player_one.secondary_cards[i].getRank() > player_two.secondary_cards[i].getRank()) {
+        result = player_one;
+        break;
+      }
+      if (player_one.secondary_cards[i].getRank() < player_two.secondary_cards[i].getRank()) {
+        result = player_two;
+        break;
+      }
+      if (player_one.secondary_cards[i].getRank() == player_two.secondary_cards[i].getRank()) {
+        continue;
+      }
+      if (player_one.secondary_cards[i] == -1 && player_two.secondary_cards[i] == -1) {
+        Player complete_tie = Player(); // returns uninitialized Player to indicate complete tie
+        result = complete_tie;
+        break;
+      }
+    }
   }
 };
 #endif
