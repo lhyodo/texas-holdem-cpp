@@ -10,15 +10,17 @@ int main() {
   std::vector<Player> vect_of_players{};
   vect_of_players.push_back(Player());  // player
   vect_of_players.push_back(Player());  // computer
-  dealer.fillHand(vect_of_players[0]);
-  dealer.fillHand(vect_of_players[1]);
-  dealer.displayHand(vect_of_players[0]);
 
   // check, call, raise, fold
   std::string input{};
   while (input != "quit") {
+    
+    dealer.fillHand(vect_of_players[0]);
+    dealer.fillHand(vect_of_players[1]);
+    std::cout << "Your Hand: " << std::endl;
+    dealer.displayHand(vect_of_players[0]);
     // flop
-    std::cout << "please enter 'check', 'call', 'raise ##', 'fold', or 'quit': ";
+    std::cout << "enter 'check', 'call', 'raise #', 'fold', or 'quit': ";
     std::cin >> input;
     if (input == "check") {
       dealer.fillBoard();
@@ -35,7 +37,7 @@ int main() {
     }
 
     // turn
-    std::cout << "please enter 'check', 'call', 'raise ##', 'fold', or 'quit': ";
+    std::cout << "enter 'check', 'call', 'raise #', 'fold', or 'quit': ";
     std::cin >> input;
     if (input == "check") {
       dealer.displayTurn();
@@ -44,30 +46,38 @@ int main() {
       break;
     }
     if (input == "fold") {
-      dealer.fillHand(vect_of_players[0]);
-      dealer.fillHand(vect_of_players[1]);
-      dealer.displayHand(vect_of_players[0]);
       continue;
     }
 
     // river
-    std::cout << "please enter 'check', 'call', 'raise ##', 'fold', or 'quit': ";
+    std::cout << "enter 'check', 'call', 'raise #', 'fold', or 'quit': ";
     std::cin >> input;
     if (input == "check") {
-      dealer.fillBoard();
       dealer.displayRiver();
+      std::cout << "Computer had:" << std::endl;
+      dealer.displayHand(vect_of_players[1]);
+      int player_points = dealer.assignPoints(vect_of_players[0]);
+      int computer_points = dealer.assignPoints(vect_of_players[1]);
+      std::cout << "Player has point value of " << player_points << "." << std::endl;
+      std::cout << "Computer has point value of " << computer_points << "." << std::endl;
+      if (player_points < computer_points) {
+        std::cout << "You lose." << std::endl;
+      }
+      if (player_points > computer_points) {
+        std::cout << "You win." << std::endl;
+      }
+      if (player_points == computer_points) {
+        std::cout << "Tie." << std::endl;
+      }
+      
       std::cout << "============================\n";
-      dealer.fillHand(vect_of_players[0]);
-      dealer.fillHand(vect_of_players[1]);
-      dealer.displayHand(vect_of_players[0]);
+      continue;
     }
     if (input == "quit") {
       break;
     }
     if (input == "fold") {
-      dealer.fillHand(vect_of_players[0]);
-      dealer.fillHand(vect_of_players[1]);
-      dealer.displayHand(vect_of_players[0]);
+      std::cout << "============================\n";
       continue;
     }
   }
