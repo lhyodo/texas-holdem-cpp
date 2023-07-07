@@ -14,16 +14,27 @@ int main() {
   // check, call, raise, fold
   std::string input{};
   while (input != "quit") {
-    
-    dealer.fillHand(vect_of_players[0]);
-    dealer.fillHand(vect_of_players[1]);
+    // debug
+    // vect_of_players[0].hand[0] = 16;
+    // vect_of_players[0].hand[1] = 12;
+    // vect_of_players[1].hand[0] = 17;
+    // vect_of_players[1].hand[1] = 29;
+    // dealer.board[0] = 40;
+    // dealer.board[1] = 8;
+    // dealer.board[2] = 28;
+    // dealer.board[3] = 32;
+    // dealer.board[4] = 20;
+    // end debug
+
+    // dealer.fillHand(vect_of_players[0]);
+    // dealer.fillHand(vect_of_players[1]);
     std::cout << "Your Hand: " << std::endl;
     dealer.displayHand(vect_of_players[0]);
     // flop
     std::cout << "enter 'check', 'call', 'raise #', 'fold', or 'quit': ";
     std::cin >> input;
     if (input == "check") {
-      dealer.fillBoard();
+      // dealer.fillBoard();
       dealer.displayFlop();
     }
     if (input == "quit") {
@@ -56,20 +67,21 @@ int main() {
       dealer.displayRiver();
       std::cout << "Computer had:" << std::endl;
       dealer.displayHand(vect_of_players[1]);
-      int player_points = dealer.assignPoints(vect_of_players[0]);
-      int computer_points = dealer.assignPoints(vect_of_players[1]);
-      std::cout << "Player has point value of " << player_points << "." << std::endl;
-      std::cout << "Computer has point value of " << computer_points << "." << std::endl;
-      if (player_points < computer_points) {
+      dealer.assignPoints(vect_of_players[0]);
+      dealer.assignPoints(vect_of_players[1]);
+
+      std::cout << "Player has point value of " << vect_of_players[0].hand_points << "." << std::endl;
+      std::cout << "Computer has point value of " << vect_of_players[1].hand_points << "." << std::endl;
+      if (vect_of_players[0].hand_points < vect_of_players[1].hand_points) {
         std::cout << "You lose." << std::endl;
       }
-      if (player_points > computer_points) {
+      if (vect_of_players[0].hand_points > vect_of_players[1].hand_points) {
         std::cout << "You win." << std::endl;
       }
-      if (player_points == computer_points) {
+      if (vect_of_players[0].hand_points == vect_of_players[0].hand_points) {
         std::cout << "Tie." << std::endl;
       }
-      
+
       std::cout << "============================\n";
       continue;
     }
