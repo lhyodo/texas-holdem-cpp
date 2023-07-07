@@ -81,6 +81,19 @@ class Dealer {
     }
   }
 
+  void displayFlop() {
+    for (int i = 0; i < 3; ++i) {
+      std::cout << board[i].getCardString() << std::endl;
+    }
+  }
+  void displayTurn() {
+    std::cout << board[3].getCardString() << std::endl;
+  }
+
+  void displayRiver() {
+    std::cout << board[4].getCardString() << std::endl;
+  }
+
   // helper method
   void combineCards(Player &player, Card *combined) {
     int index = 0;
@@ -104,7 +117,6 @@ class Dealer {
   }
 
   bool isPair(Player &player) {
-
     // This function gets the highest pair and stores it in the first 2 slots of top_five_cards
     // The next 3 slots are filled with the highest cards in combined_cards
     // This function does not work if there is a higher combination of cards such as
@@ -162,6 +174,22 @@ class Dealer {
       }
     }
     return true;
+  }
+
+  int assignPoints(Player &player) {
+    int points{};
+
+    bool flag = isPair(player);
+    if (flag) {
+      points = (1 + player.top_cards[0].getRank()) * 10;
+      for (int i = 2; i < player.TOP_SIZE; ++i) {
+        points += 1 + player.top_cards[i].getRank();
+      }
+      return points;
+    }
+    else { // has nothing, return high card
+      return 1 + getHighestRank(player);
+    }
   }
 };
 #endif
