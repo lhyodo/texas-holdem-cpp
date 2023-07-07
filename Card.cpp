@@ -1,3 +1,6 @@
+#ifndef CARD
+#define CARD
+
 #include <string>
 
 class Card {
@@ -8,12 +11,59 @@ class Card {
   Card(int raw) {
     raw_value = raw;
   }
+  Card() {
+    raw_value = -1;
+  }
+
+  void setCard(int raw) {
+    raw_value = raw;
+  }
+  int getRaw() {
+    return raw_value;
+  }
 
   int getRank() {
     return (raw_value / 4);
   }
   int getSuit() {
     return (raw_value % 4);
+  }
+
+  bool operator==(const Card &rhs) const noexcept {
+    if (raw_value / 4 == rhs.raw_value / 4) {
+      return true;
+    }
+    return false;
+  }
+  bool operator!=(const Card &rhs) const noexcept {
+    if (raw_value / 4 != rhs.raw_value / 4) {
+      return true;
+    }
+    return false;
+  }
+  bool operator<=(const Card &rhs) const noexcept {
+    if (raw_value / 4 <= rhs.raw_value / 4) {
+      return true;
+    }
+    return false;
+  }
+  bool operator>=(const Card &rhs) const noexcept {
+    if (raw_value / 4 >= rhs.raw_value / 4) {
+      return true;
+    }
+    return false;
+  }
+  bool operator<(const Card &rhs) const noexcept {
+    if (raw_value / 4 < rhs.raw_value / 4) {
+      return true;
+    }
+    return false;
+  }
+  bool operator>(const Card &rhs) const noexcept {
+    if (raw_value / 4 > rhs.raw_value / 4) {
+      return true;
+    }
+    return false;
   }
 
   std::string getCardString() {
@@ -132,3 +182,4 @@ class Card {
     }
   }
 };
+#endif
