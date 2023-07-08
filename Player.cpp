@@ -13,6 +13,7 @@ class Player {
   int chips = 1000;
   int hand_points{};
   int player_pot{};
+  bool active_bettor = true;
   Card primary_cards[TOP_SIZE]{};
   Card secondary_cards[TOP_SIZE]{};
   Card hand[HAND_SIZE]{};
