@@ -12,7 +12,7 @@ class Player {
   std::string name{};
   int chips = 1000;
   int hand_points{};
-  int player_pot{};
+  int pot{};
   bool active_bettor = true;
   Card primary_cards[TOP_SIZE]{};
   Card secondary_cards[TOP_SIZE]{};

@@ -24,7 +24,6 @@ class Dealer {
   static const int BOARD_SIZE = 5;
   Card deck[DECK_SIZE];
   Card board[BOARD_SIZE];
-  int pot{};
   int small_blind_value = 50;
   int big_blind_value = 2 * small_blind_value;
   int current_bet = big_blind_value;
@@ -40,38 +39,35 @@ class Dealer {
 
   void smallBlind(Player &player) {
     if (player.chips < small_blind_value) {
-      pot += player.chips;
-      player.player_pot += player.chips;
+      player.pot += player.chips;
       player.chips = 0;
     }
     if (player.chips >= small_blind_value) {
-      pot += small_blind_value;
-      player.player_pot += small_blind_value;
+      player.pot += small_blind_value;
       player.chips -= small_blind_value;
     }
   }
   void bigBlind(Player &player) {
     if (player.chips < big_blind_value) {
-      pot += player.chips;
-      player.player_pot += player.chips;
+      player.pot += player.chips;
       player.chips = 0;
     }
     if (player.chips >= big_blind_value) {
-      pot += big_blind_value;
-      player.player_pot += big_blind_value;
+      player.pot += big_blind_value;
       player.chips -= big_blind_value;
     }
   }
 
   int ccrfStart(Player &player) {  // return 0 for fold, 1 for call, 2 for raise
-    pot = 0;
+    player.pot = 0;
     if (player.name.find("Computer") != std::string::npos) {
       if (player == (*small_blind)) {
         std::cout << "enter 'call', 'raise #', or 'fold': ";
         std::string input{};
         if (input == "call") {
           player.chips -= current_bet - small_blind_value;
-          pot += current_bet;
+          
+          player.pot += current_bet;
         }
         if (input == "fold") {
           return 0;
@@ -102,6 +98,7 @@ class Dealer {
     }
   }
   void displayHand(Player &player) {
+    std::cout << "Your Hand:\n";
     for (int i = 0; i < player.HAND_SIZE; ++i) {
       Card foo = player.hand[i];
       std::cout << foo.getCardString() << std::endl;
