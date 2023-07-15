@@ -5,7 +5,6 @@
 #include "Dealer.cpp"
 #include "QuickSort.cpp"
 int main() {
-
   Dealer dealer{};
 
   // player initialization
@@ -29,7 +28,7 @@ int main() {
   int small_blind_index = 0;
   int big_blind_index = 1;
 
-  int starter_index{}; // the player who goes first
+  int starter_index{};  // the player who goes first
   if (vect_of_players.size() <= 2) {
     starter_index = 0;
   }
@@ -37,10 +36,7 @@ int main() {
     starter_index = 1 + big_blind_index;
   }
 
-  
-
   while (input != "quit") {
-
     // debug
     // vect_of_players[0].hand[0] = 37;
     // vect_of_players[0].hand[1] = 30;
@@ -56,9 +52,16 @@ int main() {
     // increment round
     ++round_counter;
 
+    // increase blinds every 5 rounds
+    if (round_counter % 5 == 0) {
+      dealer.small_blind_value *= 2;
+      dealer.big_blind_value *= 2;
+    }
+
     // initialize pot to 0 and fill hands
     for (auto i : vect_of_players) {
       i.pot = 0;
+      i.active_bettor = true;
       dealer.fillHand(i);
     }
 
@@ -66,12 +69,12 @@ int main() {
     std::cout << vect_of_players[small_blind_index].name << " is the small blind.";
     std::cout << vect_of_players[big_blind_index].name << " is the big blind.";
     std::cout << vect_of_players[starter_index].name << " goes first.";
-    if (round_counter % 5 == 0) {   // increase blinds every 5 rounds
+    if (round_counter % 5 == 0) {  // increase blinds every 5 rounds
       dealer.small_blind_value *= 2;
       dealer.big_blind_value = 2 * dealer.small_blind_value;
     }
     // small blind
-    if (vect_of_players[small_blind_index].chips <= dealer.small_blind_value) { // if chips are below or equal to small blind value, set chips to 0
+    if (vect_of_players[small_blind_index].chips <= dealer.small_blind_value) {  // if chips are below or equal to small blind value, set chips to 0
       vect_of_players[small_blind_index].pot = vect_of_players[small_blind_index].chips;
       vect_of_players[small_blind_index].chips = 0;
     }
@@ -89,37 +92,12 @@ int main() {
       vect_of_players[big_blind_index].chips -= dealer.big_blind_value;
     }
 
-
-    
-
     // display your hand
     dealer.displayHand(vect_of_players[0]);
 
-    // increase blinds every 5 rounds
-    
     // display
 
-
-
-    if ((*small_blind).chips < dealer.small_blind_value) {
-      // dealer.pot += (*small_blind).chips;
-      (*small_blind).chips = 0;
-    } else {
-      // dealer.pot += dealer.small_blind_value;
-      (*small_blind).chips -= dealer.small_blind_value;
-    }
-    if ((*big_blind).chips < (2 * dealer.small_blind_value)) {
-      // dealer.pot += (*big_blind).chips;
-      (*big_blind).chips = 0;
-    } else {
-      // dealer.pot += (*big_blind).chips;
-      (*big_blind).chips -= 2 * dealer.small_blind_value;
-    }
-    
-
     // start bet
-    
-
 
     // flop
     std::cout << "enter 'check', 'call', 'raise #', 'fold', or 'quit': ";
@@ -194,9 +172,7 @@ int main() {
       continue;
     }
 
-
     // increment blinds
-
   }
 
   // if (dealer.isPair(vect_of_players[0])) {

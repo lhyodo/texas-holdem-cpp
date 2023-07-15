@@ -27,9 +27,6 @@ class Dealer {
   int small_blind_value = 50;
   int big_blind_value = 2 * small_blind_value;
   int current_bet = big_blind_value;
-  Player *small_blind{};
-  Player *big_blind{};
-  Player *starter{};
 
   Dealer() {
     for (int i = 0; i < DECK_SIZE; ++i) {
@@ -57,37 +54,7 @@ class Dealer {
       player.chips -= big_blind_value;
     }
   }
-
-  int ccrfStart(Player &player) {  // return 0 for fold, 1 for call, 2 for raise
-    player.pot = 0;
-    if (player.name.find("Computer") != std::string::npos) {
-      if (player == (*small_blind)) {
-        std::cout << "enter 'call', 'raise #', or 'fold': ";
-        std::string input{};
-        if (input == "call") {
-          player.chips -= current_bet - small_blind_value;
-          
-          player.pot += current_bet;
-        }
-        if (input == "fold") {
-          return 0;
-        }
-      }
-
-      if (player == (*big_blind)) {
-        std::cout << "enter 'check', 'call', 'raise #', or 'fold': ";
-        std::string input{};
-      }
-    }
-    if (player.name.find("Computer") == std::string::npos) {
-      std::random_device rd;
-      std::mt19937 rng(rd());
-      std::uniform_int_distribution<> dist(0, 2);
-      int check_call_or_raise = dist(rng);
-      // 0 for check or call, 1 for raise, 2 for fold
-    }
-    return 0;
-  }
+  
   // std::cout << "enter 'check', 'call', 'raise #', 'fold', or 'quit': ";
   // std::string input{};
   // std::cin >> input;
