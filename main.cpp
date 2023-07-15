@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <string>
 
 #include "Card.cpp"
 #include "Dealer.cpp"
@@ -15,9 +16,12 @@ int main() {
   vect_of_players[0].name = "You";
   vect_of_players[1].name = "Computer1";
   vect_of_players[2].name = "Computer2";
+  vect_of_players[0].next_player = &vect_of_players[1];
+  vect_of_players[1].next_player = &vect_of_players[2];
+  vect_of_players[2].next_player = &vect_of_players[0];
 
   // your index in vect_of_players
-  int me = 0;
+  Player *me = &vect_of_players[0];
 
   // check, call, raise, fold
   std::string input{};
@@ -25,6 +29,11 @@ int main() {
   // blinds initialization
   int round_counter = 0;  // blinds increase every 5 rounds
   dealer.small_blind_value = 50;
+
+  Player *small_blind_player = &vect_of_players[0];
+  Player *big_blind_player = &vect_of_players[1];
+  Player *starter_player = &vect_of_players[2];
+
   int small_blind_index = 0;
   int big_blind_index = 1;
 
@@ -62,45 +71,71 @@ int main() {
     for (auto i : vect_of_players) {
       i.pot = 0;
       i.active_bettor = true;
+      i.all_in = false;
       dealer.fillHand(i);
     }
 
     /* blinds */
-    std::cout << vect_of_players[small_blind_index].name << " is the small blind.";
-    std::cout << vect_of_players[big_blind_index].name << " is the big blind.";
-    std::cout << vect_of_players[starter_index].name << " goes first.";
+    std::cout << small_blind_player->name << " is the small blind.";
+    std::cout << big_blind_player->name << " is the big blind.";
+    std::cout << starter_player->name << " goes first.";
     if (round_counter % 5 == 0) {  // increase blinds every 5 rounds
       dealer.small_blind_value *= 2;
       dealer.big_blind_value = 2 * dealer.small_blind_value;
     }
     // small blind
-    if (vect_of_players[small_blind_index].chips <= dealer.small_blind_value) {  // if chips are below or equal to small blind value, set chips to 0
-      vect_of_players[small_blind_index].pot = vect_of_players[small_blind_index].chips;
-      vect_of_players[small_blind_index].chips = 0;
+    if (small_blind_player->chips <= dealer.small_blind_value) {  // if chips are below or equal to small blind value, set chips to 0
+      small_blind_player->pot = small_blind_player->chips;
+      small_blind_player->chips = 0;
+      small_blind_player->all_in = true;
     }
-    if (vect_of_players[small_blind_index].chips > dealer.small_blind_value) {
-      vect_of_players[small_blind_index].pot += dealer.small_blind_value;
-      vect_of_players[small_blind_index].chips -= dealer.small_blind_value;
+    if (small_blind_player->chips > dealer.small_blind_value) {
+      small_blind_player->pot += dealer.small_blind_value;
+      small_blind_player->chips -= dealer.small_blind_value;
     }
     // big blind
-    if (vect_of_players[big_blind_index].chips <= dealer.big_blind_value) {
-      vect_of_players[big_blind_index].pot = vect_of_players[big_blind_index].chips;
-      vect_of_players[big_blind_index].chips = 0;
+    if (big_blind_player->chips <= dealer.big_blind_value) {
+      big_blind_player->pot = vect_of_players[big_blind_index].chips;
+      big_blind_player->chips = 0;
+      big_blind_player->all_in = true;
     }
-    if (vect_of_players[big_blind_index].chips > dealer.big_blind_value) {
-      vect_of_players[big_blind_index].pot += dealer.big_blind_value;
-      vect_of_players[big_blind_index].chips -= dealer.big_blind_value;
+    if (big_blind_player->chips > dealer.big_blind_value) {
+      big_blind_player->pot += dealer.big_blind_value;
+      big_blind_player->chips -= dealer.big_blind_value;
     }
 
     // display your hand
     dealer.displayHand(vect_of_players[0]);
 
-    // display
+    // start bets
+    Player *current = starter_player;
+    do {
+      if (current == me) {
+        if (me == small_blind_player) {
+          std::cout << "enter 'call', 'fold', or quit': ";
+          std::cin >> input;
+          if (input == "call") {
+          }
+          else if (input == "fold") {
 
-    // start bet
+          }
+          else if (input == "quit") {
+
+          }
+          else {
+            std::cout << "INPUT ERROR HERE";
+          }
+        }
+      }
+
+
+
+      current = current->next_player;
+    } while (current != starter_player);
 
     // flop
-    std::cout << "enter 'check', 'call', 'raise #', 'fold', or 'quit': ";
+    std::cout
+        << "enter 'check', 'call', 'raise #', 'fold', or 'quit': ";
     std::cin >> input;
     if (input == "check") {
       dealer.fillBoard();

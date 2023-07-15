@@ -14,6 +14,8 @@ class Player {
   int hand_points{};
   int pot{};
   bool active_bettor = true;
+  bool all_in = false;
+  Player *next_player{};
   Card primary_cards[TOP_SIZE]{};
   Card secondary_cards[TOP_SIZE]{};
   Card hand[HAND_SIZE]{};
