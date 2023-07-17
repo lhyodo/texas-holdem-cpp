@@ -36,15 +36,13 @@ int main() {
   Player *starter = &vect_of_players[2];
 
   for (auto i = 0; i < 100; ++i) {  // max 100 rounds
-
+    dealer.resetDeck();
     for (auto j = vect_of_players.begin(); j != vect_of_players.end(); ++j) {  // initialize pots and fill hands
       j->pot = 0;
       j->active_bettor = true;
       j->all_in = false;
       dealer.fillHand(*j);
     }
-
-    me->displayHand();  // display your hand
 
     // take blinds
     if (small_blind->chips <= dealer.small_blind_value) {  // small blind
@@ -64,29 +62,63 @@ int main() {
       big_blind->chips -= dealer.big_blind_value;
     }
 
+    // display
+    std::cout << "========================================\n";
+    std::cout << small_blind->name << " is the small blind.\n";
+    std::cout << big_blind->name << " is the big blind.\n";
+    std::cout << starter->name << " goes first.\n";
+    me->displayHand();  // display your hand
+
     // start bets
     Player *it = starter;  // iterator
-    std::cout << "enter call, fold, or quit: ";
-    std::cin >> input;
-    if (input == "call") {
-      if (it == small_blind) {
-        if (it->chips <= dealer.current_bet - dealer.small_blind_value) {
-          it->pot = it->chips;
-          it->chips = 0;
-          it->all_in = true;
-        }
-        if (it->chips > dealer.current_bet - dealer.small_blind_value) {
-          it->pot += dealer.current_bet - dealer.small_blind_value;
-          it->chips -= dealer.current_bet - dealer.small_blind_value;
-        }
-      }
 
-    } else if (input == "fold") {
-      it->active_bettor = false;
-    }
-    it = it->next;
-    while (it != starter) {
-    }
+
+
+
+
+    // std::cout << "enter call, fold, or quit: ";
+    // std::cin >> input;
+    // if (input == "call") {
+    //   if (it == small_blind) {
+    //     if (it->chips <= dealer.current_bet - dealer.small_blind_value) {
+    //       it->pot = it->chips;
+    //       it->chips = 0;
+    //       it->all_in = true;
+    //     } else {
+    //       it->pot += dealer.current_bet - dealer.small_blind_value;
+    //       it->chips -= dealer.current_bet - dealer.small_blind_value;
+    //     }
+    //   } else if (it == big_blind) {
+    //     if (it->chips <= dealer.current_bet - dealer.big_blind_value) {
+    //       it->pot = it->chips;
+    //       it->chips = 0;
+    //       it->all_in = true;
+    //     } else {
+    //       it->pot += dealer.current_bet - dealer.big_blind_value;
+    //       it->chips -= dealer.current_bet - dealer.big_blind_value;
+    //     }
+    //   } else {
+    //     if (it->chips <= dealer.current_bet) {
+    //       it->pot = it->chips;
+    //       it->chips = 0;
+    //       it->all_in = true;
+    //     }
+    //     if (it->chips > dealer.current_bet) {
+    //       it->pot += dealer.current_bet;
+    //       it->chips -= dealer.current_bet;
+    //     }
+    //   }
+
+    // } else if (input == "fold") {
+    //   it->active_bettor = false;
+    // }
+    // it = it->next;
+    // while (it != starter) {
+    // }
+    small_blind = small_blind->next;
+    big_blind = big_blind->next;
+    starter = starter->next;
+
   }
 
   return 0;
