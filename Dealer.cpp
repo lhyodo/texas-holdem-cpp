@@ -29,14 +29,34 @@ class Dealer {
   int small_blind_value = 50;
   int big_blind_value = 2 * small_blind_value;
   int current_bet = big_blind_value;
-  Player *head{};
+  Player *head{};  // the player that bets first
   Player *small_blind{};
   Player *big_blind{};
+  std::vector<Player> players{};
 
   Dealer() {
     for (int i = 0; i < DECK_SIZE; ++i) {
       deck[i].setCard(i);
     }
+  }
+
+  void addPlayer(std::string name) {
+    if (players.size() == 0) {
+      players.push_back(Player(name));
+    } else if (players.size() >= 1) {
+      players.push_back(Player(name));
+      players[players.size() - 2].next = &players[players.size() - 1];
+      players[players.size() - 1].next = &players[0];
+    }
+  }
+  int numActivePlayers() {
+    int n = 0;
+    for (int i = 0; i < players.size(); ++i) {
+      if (players[i].knocked_out == true) {
+        ++n;
+      }
+    }
+    return n;
   }
 
   void smallBlind(Player &player) {
@@ -59,7 +79,7 @@ class Dealer {
       player.chips -= big_blind_value;
     }
   }
-  
+
   // std::cout << "enter 'check', 'call', 'raise #', 'fold', or 'quit': ";
   // std::string input{};
   // std::cin >> input;

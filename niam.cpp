@@ -19,14 +19,15 @@ int main() {
   dealer.head = &me;  // head of linked list
 
   // blinds initialization
-  int round_counter = 1;  // blinds increase every 5 rounds
+  int round_counter = 1;
   dealer.small_blind_value = 50;
   dealer.big_blind_value = 100;
   dealer.current_bet = dealer.big_blind_value;
   dealer.small_blind = &frank;
   dealer.big_blind = &gary;
 
-  // 
+  dealer.
+  
 
 
   return 0;

@@ -16,6 +16,7 @@ class Player {
   int pot{};
   bool active_bettor = true;
   bool all_in = false;
+  bool knocked_out = false;
   Player *next{};
   Card primary_cards[TOP_SIZE]{};
   Card secondary_cards[TOP_SIZE]{};
