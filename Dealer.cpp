@@ -17,6 +17,8 @@
 // A "Spades" card has a suit of 3
 // A  "Clubs" card has a suit of 0
 
+// Players are a circular linked list, with a "head" to indicate the starting player
+
 class Dealer {
  private:
  public:
@@ -27,6 +29,9 @@ class Dealer {
   int small_blind_value = 50;
   int big_blind_value = 2 * small_blind_value;
   int current_bet = big_blind_value;
+  Player *head{};
+  Player *small_blind{};
+  Player *big_blind{};
 
   Dealer() {
     for (int i = 0; i < DECK_SIZE; ++i) {

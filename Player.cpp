@@ -1,8 +1,9 @@
 
 #ifndef PLAYER
 #define PLAYER
-#include "Card.cpp"
 #include <string>
+
+#include "Card.cpp"
 
 class Player {
  private:
@@ -15,11 +16,21 @@ class Player {
   int pot{};
   bool active_bettor = true;
   bool all_in = false;
-  Player *next_player{};
+  Player *next{};
   Card primary_cards[TOP_SIZE]{};
   Card secondary_cards[TOP_SIZE]{};
   Card hand[HAND_SIZE]{};
   Player() {
+    for (int i = 0; i < TOP_SIZE; ++i) {
+      primary_cards[i].setCard(-1);
+      secondary_cards[i].setCard(-1);
+    }
+    for (int i = 0; i < HAND_SIZE; ++i) {
+      hand[i].setCard(-1);
+    }
+  }
+  Player(std::string n) {
+    name = n;
     for (int i = 0; i < TOP_SIZE; ++i) {
       primary_cards[i].setCard(-1);
       secondary_cards[i].setCard(-1);
@@ -46,6 +57,5 @@ class Player {
     }
     return true;
   }
-  
 };
 #endif
