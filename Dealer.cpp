@@ -29,6 +29,7 @@ class Dealer {
   int small_blind_value = 50;
   int big_blind_value = 2 * small_blind_value;
   int current_bet = big_blind_value;
+  int round_counter = 0;
   Player *head{};  // the player that bets first
   Player *small_blind{};
   Player *big_blind{};
@@ -49,7 +50,8 @@ class Dealer {
       players[players.size() - 1].next = &players[0];
     }
   }
-  int numActivePlayers() {
+
+  int getNumActivePlayers() {
     int n = 0;
     for (int i = 0; i < players.size(); ++i) {
       if (players[i].knocked_out == true) {
@@ -57,6 +59,14 @@ class Dealer {
       }
     }
     return n;
+  }
+
+  void setBlinds() {
+    
+  }
+
+  void advanceBlinds() {
+
   }
 
   void smallBlind(Player &player) {
