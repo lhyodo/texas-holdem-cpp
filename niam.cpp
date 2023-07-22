@@ -10,21 +10,19 @@ int main() {
   Dealer dealer{};
 
   // player and linked list initialization
-  Player me = Player("You");
-  Player frank = Player("BOT Frank");
-  Player gary = Player("BOT Gary");
-  me.next = &frank;
-  frank.next = &gary;
-  gary.next = &me;
-  dealer.head = &me;  // head of linked list
+  dealer.addPlayer("You");
+  dealer.addPlayer("Frank");
+  dealer.addPlayer("Gary");
 
   // blinds initialization
-  int round_counter = 1;
-  dealer.small_blind_value = 50;
-  dealer.big_blind_value = 100;
-  dealer.current_bet = dealer.big_blind_value;
-  dealer.small_blind = &frank;
-  dealer.big_blind = &gary;
+  // int round_counter = 1;
+  // dealer.small_blind_value = 50; // setSmallBlindValue
+  // dealer.big_blind_value = 100;
+  // dealer.current_bet = dealer.big_blind_value; // setCurrentBet
+  // dealer.small_blind = &frank; // setBlinds
+  // dealer.big_blind = &gary; // advanceBlinds
+
+
 
   dealer.
   
