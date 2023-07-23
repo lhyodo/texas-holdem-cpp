@@ -62,11 +62,15 @@ class Dealer {
   }
 
   void setBlinds() {
-    
+    small_blind = &players[0];
+    big_blind = &players[1];
+    head = &players[2];
   }
 
   void advanceBlinds() {
-
+    small_blind = small_blind->next;
+    big_blind = big_blind->next;
+    head = head->next;
   }
 
   void smallBlind(Player &player) {
