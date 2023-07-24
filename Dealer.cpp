@@ -83,6 +83,30 @@ class Dealer {
     head = head->next;
   }
 
+  void takeBlinds() {
+    // small blind
+    if (small_blind->chips <= small_blind_value) {
+      small_blind->pot = small_blind->chips;
+      small_blind->chips = 0;
+      small_blind->all_in = true;
+    }
+    if (small_blind->chips > small_blind_value) {
+      small_blind->pot = small_blind_value;
+      small_blind->chips -= small_blind_value;
+    }
+
+    // big blind
+    if (big_blind->chips <= big_blind_value) {
+      big_blind->pot = big_blind->chips;
+      big_blind->chips = 0;
+      big_blind->all_in = true;
+    }
+    if (big_blind->chips > big_blind_value) {
+      big_blind->pot = big_blind_value;
+      big_blind->chips -= big_blind_value;
+    }
+  }
+
   void smallBlind(Player &player) {
     if (player.chips < small_blind_value) {
       player.pot += player.chips;
