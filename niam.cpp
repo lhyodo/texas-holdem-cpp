@@ -7,26 +7,28 @@
 #include "Player.cpp"
 #include "QuickSort.cpp"
 int main() {
-  Dealer dealer{};
+    Dealer dealer{};
 
-  // player and linked list initialization
-  dealer.addPlayer("You");
-  dealer.addPlayer("Frank");
-  dealer.addPlayer("Gary");
+    // player and linked list initialization
+    dealer.addPlayer("You");
+    dealer.addPlayer("Frank");
+    dealer.addPlayer("Gary");
+    dealer.initBlinds();
+    dealer.setBlinds(50, 100);
 
-  // blinds initialization
-  // int round_counter = 1;
-  // dealer.small_blind_value = 50; // setSmallBlindValue
-  // dealer.big_blind_value = 100;
-  // dealer.current_bet = dealer.big_blind_value; // setCurrentBet
-  // dealer.small_blind = &frank; // setBlinds
-  // dealer.big_blind = &gary; // advanceBlinds
-
-
-
-  dealer.
-  
+    // blinds initialization
+    // int round_counter = 1;
+    // dealer.small_blind_value = 50; // setSmallBlindValue
+    // dealer.big_blind_value = 100;
+    // dealer.current_bet = dealer.big_blind_value; // setCurrentBet
+    // dealer.small_blind = &frank; // setBlinds
+    // dealer.big_blind = &gary; // advanceBlinds
 
 
-  return 0;
+
+    while (dealer.getActivePlayerCount() > 1) {
+      
+    }
+
+        return 0;
 }
