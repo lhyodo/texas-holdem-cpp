@@ -61,7 +61,7 @@ class Dealer {
         return n;
     }
 
-    void setBlinds() {
+    void initBlinds() {
         if (players.size() <= 1) {
             std::cout << "setBlinds error\n";
         }
@@ -84,8 +84,10 @@ class Dealer {
     }
 
     void takeBlinds() {
-        // small blind
+
         current_bet = big_blind_value;
+
+        // small blind
         if (small_blind->chips <= small_blind_value) {
             small_blind->pot = small_blind->chips;
             small_blind->chips = 0;
@@ -106,6 +108,11 @@ class Dealer {
             big_blind->pot = big_blind_value;
             big_blind->chips -= big_blind_value;
         }
+    }
+
+    void setBlinds(int small, int big) {
+      small_blind_value = small;
+      big_blind_value = big;
     }
 
     void displayDeck() {
