@@ -51,7 +51,7 @@ class Dealer {
     }
   }
 
-  int getNumActivePlayers() {
+  int getActivePlayerCount() {
     int n = 0;
     for (int i = 0; i < players.size(); ++i) {
       if (players[i].knocked_out == true) {
