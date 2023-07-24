@@ -62,7 +62,7 @@ class Dealer {
   }
 
   void setBlinds() {
-    if (players.size() < 2) {
+    if (players.size() <= 1) {
       std::cout << "setBlinds error\n";
     }
     if (players.size() == 2) {
@@ -70,7 +70,7 @@ class Dealer {
       big_blind = &players[1];
       head = &players[0];
     }
-    if (players.size() > 2) {
+    if (players.size() >= 3) {
       small_blind = &players[0];
       big_blind = &players[1];
       head = &players[2];
