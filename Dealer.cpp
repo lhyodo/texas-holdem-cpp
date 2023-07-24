@@ -62,7 +62,7 @@ class Dealer {
   }
 
   void setBlinds() {
-    if (players.size() <= 1) {
+    if (players.size() < 2) {
       std::cout << "setBlinds error\n";
     }
     if (players.size() == 2) {
