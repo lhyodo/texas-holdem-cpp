@@ -115,6 +115,14 @@ class Dealer {
       big_blind_value = big;
     }
 
+    void setCurrentBet(int n) {
+      current_bet = n;
+    }
+
+    void addCurrentBet(int n) {
+      current_bet += n;
+    }
+
     void displayDeck() {
         for (int i = 0; i < DECK_SIZE; ++i) {
             std::cout << "Raw value: " << deck[i].getRaw() << std::endl;
