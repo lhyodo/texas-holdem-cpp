@@ -30,7 +30,6 @@ class Dealer {
     int small_blind_value = 50;
     int big_blind_value = 2 * small_blind_value;
     int current_bet = big_blind_value;
-    int round_counter = 0;
     Player *head{};  // the player that bets first
     Player *small_blind{};
     Player *big_blind{};
@@ -82,6 +81,23 @@ class Dealer {
         small_blind = small_blind->next;
         big_blind = big_blind->next;
         head = head->next;
+    }
+
+    void raiseBlinds() {
+        small_blind_value *= 2;
+        big_blind_value *= 2;
+    }
+
+    void takeBet(Player player, int val) {
+        if (player.chips <= val) {
+            player.pot = player.chips;
+            player.chips = 0;
+            player.all_in = true;
+        }
+        if (player.chips > val) {
+            player.pot = val;
+            player.chips -= val;
+        }
     }
 
     void takeBlinds() {
@@ -141,7 +157,7 @@ class Dealer {
         std::random_device rd;
         std::mt19937 rng(rd());
         std::uniform_int_distribution<> dist(0, DECK_SIZE - 1);
-        
+
         for (auto it = players.begin(); it != players.end(); ++it) {
             int foo = 0;
             while (foo < HAND_SIZE) {
@@ -176,11 +192,11 @@ class Dealer {
         }
     }
 
-    void displayBoard() {
-        for (int i = 0; i < BOARD_SIZE; ++i) {
-            std::cout << board[i].getCardString() << std::endl;
-        }
-    }
+    // void displayBoard() {
+    //     for (int i = 0; i < BOARD_SIZE; ++i) {
+    //         std::cout << board[i].getCardString() << std::endl;
+    //     }
+    // }
 
     void displayFlop() {
         for (int i = 0; i < 3; ++i) {
