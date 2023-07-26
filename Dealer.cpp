@@ -24,6 +24,7 @@ class Dealer {
    public:
     static const int DECK_SIZE = 52;
     static const int BOARD_SIZE = 5;
+    static const int HAND_SIZE = 2;
     Card deck[DECK_SIZE];
     Card board[BOARD_SIZE];
     int small_blind_value = 50;
@@ -54,7 +55,7 @@ class Dealer {
     int getActivePlayerCount() {
         int n = 0;
         for (int i = 0; i < players.size(); ++i) {
-            if (players[i].knocked_out == true) {
+            if (players[i].knocked_out == false) {
                 ++n;
             }
         }
@@ -84,7 +85,6 @@ class Dealer {
     }
 
     void takeBlinds() {
-
         current_bet = big_blind_value;
 
         // small blind
@@ -111,16 +111,16 @@ class Dealer {
     }
 
     void setBlinds(int small, int big) {
-      small_blind_value = small;
-      big_blind_value = big;
+        small_blind_value = small;
+        big_blind_value = big;
     }
 
     void setCurrentBet(int n) {
-      current_bet = n;
+        current_bet = n;
     }
 
     void addCurrentBet(int n) {
-      current_bet += n;
+        current_bet += n;
     }
 
     void displayDeck() {
@@ -137,17 +137,20 @@ class Dealer {
         }
     }
 
-    void fillHand(Player &player) {
+    void fillHands() {
         std::random_device rd;
         std::mt19937 rng(rd());
         std::uniform_int_distribution<> dist(0, DECK_SIZE - 1);
-        int arr_counter = 0;
-        while (arr_counter < player.HAND_SIZE) {
-            int rand_card = dist(rng);
-            if (deck[rand_card].getRaw() != -1) {
-                player.hand[arr_counter].setCard(rand_card);
-                ++arr_counter;
-                deck[rand_card] = -1;
+        
+        for (auto it = players.begin(); it != players.end(); ++it) {
+            int foo = 0;
+            while (foo < HAND_SIZE) {
+                int rand_card = dist(rng);
+                if (deck[rand_card].getRaw() != -1) {
+                    it->hand[foo].setCard(rand_card);
+                    ++foo;
+                    deck[rand_card] = -1;
+                }
             }
         }
     }

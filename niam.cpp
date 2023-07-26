@@ -16,19 +16,15 @@ int main() {
     dealer.initBlinds();
     dealer.setBlinds(50, 100);
 
-    // blinds initialization
-    // int round_counter = 1;
-    // dealer.small_blind_value = 50; // setSmallBlindValue
-    // dealer.big_blind_value = 100;
-    // dealer.current_bet = dealer.big_blind_value; // setCurrentBet
-    // dealer.small_blind = &frank; // setBlinds
-    // dealer.big_blind = &gary; // advanceBlinds
+    
 
 
 
-    while (dealer.getActivePlayerCount() > 1) {
-      
-    }
+    // while (dealer.getActivePlayerCount() > 1) {
+      dealer.takeBlinds();
+      dealer.fillHands();
+      dealer.displayHand(dealer.players[0]);
+    // }
 
         return 0;
 }
