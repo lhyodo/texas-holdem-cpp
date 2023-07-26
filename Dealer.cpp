@@ -99,6 +99,21 @@ class Dealer {
             player.chips -= val;
         }
     }
+    void call(Player player) {
+        if (player == *big_blind) {
+            takeBet(player, current_bet - big_blind_value);
+        } else if (player == *small_blind) {
+            takeBet(player, current_bet - small_blind_value);
+        } else {
+            takeBet(player, current_bet);
+        }
+    }
+    void fold(Player player) {
+        player.active_bettor = false;
+    }
+    void check(Player player) {
+        
+    }
 
     void takeBlinds() {
         current_bet = big_blind_value;
