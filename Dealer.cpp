@@ -30,7 +30,7 @@ class Dealer {
     int small_blind_value = 50;
     int big_blind_value = 2 * small_blind_value;
     int current_bet = big_blind_value;
-    Player *head{};  // the player that bets first
+    Player *head{};  // the player that bets first, or the raises
     Player *small_blind{};
     Player *big_blind{};
     std::vector<Player> players{};
@@ -44,11 +44,28 @@ class Dealer {
     void addPlayer(std::string name) {
         if (players.size() == 0) {
             players.push_back(Player(name));
-        } else if (players.size() >= 1) {
+        } else if (players.size() == 1) {
             players.push_back(Player(name));
-            players[players.size() - 2].next = &players[players.size() - 1];
-            players[players.size() - 1].next = &players[0];
+            players[0].next = &players[1];
+            players[1].next = &players[0];
+        } else if (players.size() == 2) {
+            players.push_back(Player(name));
+            players[0].next = &players[1];
+            players[1].next = &players[2];
+            players[2].next = &players[0];
+            // for unknown reasons this code doesn't work, so I wrote it out instead
+            // players[players.size() - 2].next = &players[players.size() - 1];
+            // players[players.size() - 1].next = &players[0];
+        } else if (players.size() == 3) {
+            players.push_back(Player(name));
+            players[0].next = &players[1];
+            players[1].next = &players[2];
+            players[2].next = &players[3];
+            players[3].next = &players[0];
+        } else {
+            std::cout << "Max amount of players (4)\n";
         }
+
     }
 
     int getActivePlayerCount() {
@@ -88,18 +105,24 @@ class Dealer {
         big_blind_value *= 2;
     }
 
+    // helper function Player
     void takeBet(Player player, int val) {
         if (player.chips <= val) {
-            player.pot = player.chips;
+            player.pot += player.chips;
             player.chips = 0;
             player.all_in = true;
+            std::cout << "Player " << player.name << " has 0 chips and is all in!\n";
         }
         if (player.chips > val) {
             player.pot = val;
             player.chips -= val;
         }
     }
-    void call(Player player) {
+
+    void check(Player player) {
+    }
+
+    void callStart(Player player) {
         if (player == *big_blind) {
             takeBet(player, current_bet - big_blind_value);
         } else if (player == *small_blind) {
@@ -108,11 +131,18 @@ class Dealer {
             takeBet(player, current_bet);
         }
     }
+
+    void call(Player player) {
+        takeBet(player, current_bet);
+    }
+
     void fold(Player player) {
         player.active_bettor = false;
     }
-    void check(Player player) {
-        
+
+    void raise(Player player, int val) {
+        current_bet += val;
+        takeBet(player, val);
     }
 
     void takeBlinds() {
@@ -146,13 +176,13 @@ class Dealer {
         big_blind_value = big;
     }
 
-    void setCurrentBet(int n) {
-        current_bet = n;
-    }
+    // void setCurrentBet(int n) {
+    //     current_bet = n;
+    // }
 
-    void addCurrentBet(int n) {
-        current_bet += n;
-    }
+    // void addCurrentBet(int n) {
+    //     current_bet += n;
+    // }
 
     void displayDeck() {
         for (int i = 0; i < DECK_SIZE; ++i) {
