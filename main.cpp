@@ -67,7 +67,6 @@ int main() {
                             std::cout << current->name << " has folded.\n";
                         }
                         if (input_str.find("raise") != std::string::npos) {
-                            // todo
                             std::string trim = input_str.substr(6);
                             int num = std::stoi(trim);
                             dealer.raise(*current, num);
@@ -86,7 +85,6 @@ int main() {
                             std::cout << current->name << " has folded.\n";
                         }
                         if (input_str.find("raise") != std::string::npos) {
-                            // todo
                             std::string trim = input_str.substr(6);
                             int num = std::stoi(trim);
                             dealer.raise(*current, num);
@@ -104,7 +102,6 @@ int main() {
                             std::cout << current->name << " has folded.\n";
                         }
                         if (input_str.find("raise") != std::string::npos) {
-                            // todo
                             std::string trim = input_str.substr(6);
                             int num = std::stoi(trim);
                             dealer.raise(*current, num);
