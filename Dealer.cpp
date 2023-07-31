@@ -244,6 +244,12 @@ class Dealer {
         std::cout << "==============================\n";
     }
 
+    void roundReset() {
+        for (int i = 0; i < players.size(); ++i) {
+            players[i].active_bettor = true;
+        }
+    }
+
     // helper method
     void combineCards(Player &player, Card *combined) {
         int index = 0;
