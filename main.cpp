@@ -28,7 +28,7 @@ int main() {
     do {
         if (current->active_bettor == true) {
             if (current->name.find("BOT") != std::string::npos) {
-                dealer.takeBet(*current, dealer.current_bet - current->pot);  // call
+                dealer.call(*current);  // BOT will always call
 
             } else if (current->name.find("BOT") == std::string::npos) {
                 if (current == dealer.big_blind && dealer.current_bet == dealer.big_blind_value) {
@@ -113,7 +113,39 @@ int main() {
         current = current->next;
     } while (current != head);
 
-    // dealer.fillBoard();
+    dealer.fillBoard();
+    dealer.displayFlop();
+    // post flop bets
+    do {
+        if (current->active_bettor == true) {
+            if (current->name.find("BOT") != std::string::npos) {
+                dealer.call(*current);  // BOT will always call
+            }
+
+            else if (current->name.find("BOT") == std::string::npos) {
+                std::cout << "Enter check, raise, or fold: ";
+                std::getline(std::cin, input_str);
+                if (input_str == "check") {
+                    dealer.check(*current);
+                    std::cout << current->name << " has checked.\n";
+                }
+                if (input_str == "fold") {
+                    current->active_bettor = false;
+                    std::cout << current->name << " has folded.\n";
+                }
+                if (input_str.find("raise") != std::string::npos) {
+                    std::string trim = input_str.substr(6);
+                    int num = std::stoi(trim);
+                    dealer.raise(*current, num);
+                    head = current;
+                }
+            }
+        } else {
+            continue;
+        }
+
+        current = current->next;
+    } while (current != head);
 
     // end
     dealer.advanceBlinds();

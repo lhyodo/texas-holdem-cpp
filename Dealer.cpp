@@ -141,7 +141,7 @@ class Dealer {
 
     void raise(Player &player, int val) {
         current_bet += val;
-        takeBet(player, current_bet);
+        takeBet(player, current_bet - player.pot);
     }
 
     void setBlinds(int small, int big) {
@@ -210,24 +210,36 @@ class Dealer {
         }
     }
 
-    // void displayBoard() {
-    //     for (int i = 0; i < BOARD_SIZE; ++i) {
-    //         std::cout << board[i].getCardString() << std::endl;
-    //     }
-    // }
+    void displayBoard() {
+        std::cout << "==============================\n";
+        std::cout << "The Board: \n";
+        for (int i = 0; i < BOARD_SIZE; ++i) {
+            std::cout << board[i].getCardString() << std::endl;
+        }
+        std::cout << "==============================\n";
+    }
 
     void displayFlop() {
+        std::cout << "==============================\n";
+        std::cout << "The Flop: \n";
         for (int i = 0; i < 3; ++i) {
             std::cout << board[i].getCardString() << std::endl;
         }
+        std::cout << "==============================\n";
     }
 
     void displayTurn() {
+        std::cout << "==============================\n";
+        std::cout << "The Turn: \n";
         std::cout << board[3].getCardString() << std::endl;
+        std::cout << "==============================\n";
     }
 
     void displayRiver() {
+        std::cout << "==============================\n";
+        std::cout << "The River: \n";
         std::cout << board[4].getCardString() << std::endl;
+        std::cout << "==============================\n";
     }
 
     // helper method
