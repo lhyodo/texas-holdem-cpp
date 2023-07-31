@@ -18,7 +18,6 @@ int main() {
 
     int roundCounter = 1;
     // while (dealer.getActivePlayerCount() > 1) {
-    // dealer.takeBlinds();
     dealer.fillHands();
     dealer.displayHand(dealer.players[0]);
 
@@ -44,10 +43,9 @@ int main() {
                         std::cout << current->name << " has folded.\n";
                     }
                     if (input_str.find("raise") != std::string::npos) {
-                        // todo
                         std::string trim = input_str.substr(6);
                         int num = std::stoi(trim);
-						dealer.raise(*current, num);
+                        dealer.raise(*current, num);
                         head = current;
                     }
 
@@ -66,8 +64,7 @@ int main() {
                         // todo
                         std::string trim = input_str.substr(6);
                         int num = std::stoi(trim);
-						dealer.raise(*current, num);
-                        //dealer.takeBet(*current, dealer.current_bet);
+                        dealer.raise(*current, num);
                         head = current;
                     }
 
@@ -86,8 +83,7 @@ int main() {
                         // todo
                         std::string trim = input_str.substr(6);
                         int num = std::stoi(trim);
-						dealer.raise(*current, num);
-                        //dealer.takeBet(*current, dealer.current_bet);
+                        dealer.raise(*current, num);
                         head = current;
                     }
                 } else if (current != dealer.small_blind && current != dealer.big_blind) {
@@ -98,15 +94,14 @@ int main() {
                         dealer.call(*current);
                     }
                     if (input_str == "fold") {
-                      dealer.fold(*current);
+                        dealer.fold(*current);
                         std::cout << current->name << " has folded.\n";
                     }
                     if (input_str.find("raise") != std::string::npos) {
                         // todo
                         std::string trim = input_str.substr(6);
                         int num = std::stoi(trim);
-						dealer.raise(*current, num);
-                        //dealer.takeBet(*current, dealer.current_bet);
+                        dealer.raise(*current, num);
                         head = current;
                     }
                 }
@@ -117,7 +112,6 @@ int main() {
 
         current = current->next;
     } while (current != head);
-
 
     // dealer.fillBoard();
 
