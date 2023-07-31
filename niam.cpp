@@ -57,7 +57,7 @@ int main() {
                     std::cout << "Enter check, raise, or fold: ";
                     std::getline(std::cin, input_str);
                     if (input_str == "call") {
-                        dealer.takeBet(dealer.players[0], dealer.current_bet);
+                        dealer.takeBet(dealer.players[0], dealer.current_bet - current->pot);
                         std::cout << current->name << " has checked.\n";
                     }
                     if (input_str == "fold") {
@@ -78,7 +78,7 @@ int main() {
                     std::cout << "Enter call, raise, or fold: ";
                     std::getline(std::cin, input_str);
                     if (input_str == "call") {
-                        dealer.takeBet(*current, dealer.current_bet);
+                        dealer.takeBet(*current, dealer.current_bet - current->pot);
                         std::cout << current->name << " has called.\n";
                     }
                     if (input_str == "fold") {
@@ -99,7 +99,7 @@ int main() {
                     std::getline(std::cin, input_str);
                     if (input_str == "call") {
                         std::cout << current->name << " has called.\n";
-                        dealer.takeBet(*current, dealer.current_bet);
+                        dealer.takeBet(*current, dealer.current_bet - current->pot);
                     }
                     if (input_str == "fold") {
                         std::cout << current->name << " has folded.\n";
