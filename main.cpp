@@ -29,6 +29,7 @@ int main() {
         if (current->active_bettor == true) {
             if (current->name.find("BOT") != std::string::npos) {
                 dealer.call(*current);  // BOT will always call
+                std::cout << current->name << " has called.\n";
 
             } else if (current->name.find("BOT") == std::string::npos) {
                 if (current == dealer.big_blind && dealer.current_bet == dealer.big_blind_value) {
@@ -107,6 +108,7 @@ int main() {
                 }
             }
         } else {
+            current = current->next;
             continue;
         }
 
@@ -122,6 +124,7 @@ int main() {
         if (current->active_bettor == true) {
             if (current->name.find("BOT") != std::string::npos) {
                 dealer.call(*current);  // BOT will always call
+                std::cout << current->name << " has called.\n";
             }
 
             else if (current->name.find("BOT") == std::string::npos) {
@@ -143,6 +146,7 @@ int main() {
                 }
             }
         } else {
+            current = current->next;
             continue;
         }
         current = current->next;
@@ -156,6 +160,7 @@ int main() {
         if (current->active_bettor == true) {
             if (current->name.find("BOT") != std::string::npos) {
                 dealer.call(*current);  // BOT will always call
+                std::cout << current->name << " has called.\n";
             }
 
             else if (current->name.find("BOT") == std::string::npos) {
@@ -177,6 +182,7 @@ int main() {
                 }
             }
         } else {
+            current = current->next;
             continue;
         }
         current = current->next;
@@ -190,6 +196,7 @@ int main() {
         if (current->active_bettor == true) {
             if (current->name.find("BOT") != std::string::npos) {
                 dealer.call(*current);  // BOT will always call
+                std::cout << current->name << " has called.\n";
             }
 
             else if (current->name.find("BOT") == std::string::npos) {
@@ -211,6 +218,7 @@ int main() {
                 }
             }
         } else {
+            current = current->next;
             continue;
         }
         current = current->next;
