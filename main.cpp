@@ -38,7 +38,7 @@ int main() {
 
                 } else if (current->name.find("BOT") == std::string::npos) {
                     if (current == dealer.big_blind && dealer.bet_total == dealer.big_blind_value) {
-                        std::cout << "Enter check, raise, or fold: ";
+                        std::cout << "Enter check, raise #, or fold: ";
                         std::getline(std::cin, input_str);
                         if (input_str == "check") {
                             dealer.check(*current);
@@ -56,7 +56,7 @@ int main() {
                         }
 
                     } else if (current == dealer.big_blind && dealer.bet_total != dealer.big_blind_value) {
-                        std::cout << "Enter check, raise, or fold: ";
+                        std::cout << "Enter check, raise #, or fold: ";
                         std::getline(std::cin, input_str);
                         if (input_str == "call") {
                             dealer.call(*current);
@@ -74,7 +74,7 @@ int main() {
                         }
 
                     } else if (current == dealer.small_blind) {
-                        std::cout << "Enter call, raise, or fold: ";
+                        std::cout << "Enter call, raise #, or fold: ";
                         std::getline(std::cin, input_str);
                         if (input_str == "call") {
                             dealer.call(*current);
@@ -91,7 +91,7 @@ int main() {
                             head = current;
                         }
                     } else if (current != dealer.small_blind && current != dealer.big_blind) {
-                        std::cout << "Enter call, raise, or fold: ";
+                        std::cout << "Enter call, raise #, or fold: ";
                         std::getline(std::cin, input_str);
                         if (input_str == "call") {
                             std::cout << current->name << " has called.\n";
@@ -136,7 +136,7 @@ int main() {
                 }
 
                 else if (current->name.find("BOT") == std::string::npos) {
-                    std::cout << "Enter check, raise, or fold: ";
+                    std::cout << "Enter check, raise #, or fold: ";
                     std::getline(std::cin, input_str);
                     if (input_str == "check") {
                         dealer.check(*current);
@@ -178,7 +178,7 @@ int main() {
                 }
 
                 else if (current->name.find("BOT") == std::string::npos) {
-                    std::cout << "Enter check, raise, or fold: ";
+                    std::cout << "Enter check, raise #, or fold: ";
                     std::getline(std::cin, input_str);
                     if (input_str == "check") {
                         dealer.check(*current);
@@ -220,7 +220,7 @@ int main() {
                 }
 
                 else if (current->name.find("BOT") == std::string::npos) {
-                    std::cout << "Enter check, raise, or fold: ";
+                    std::cout << "Enter check, raise #, or fold: ";
                     std::getline(std::cin, input_str);
                     if (input_str == "check") {
                         dealer.check(*current);
