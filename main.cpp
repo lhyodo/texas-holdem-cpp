@@ -28,8 +28,13 @@ int main() {
         do {
             if (current->active_bettor == true) {
                 if (current->name.find("BOT") != std::string::npos) {
-                    dealer.call(*current);  // BOT will always call
-                    std::cout << current->name << " has called.\n";
+                    if (current == dealer.big_blind) {
+                        dealer.check(*current);
+                        std::cout << current->name << " has checked.\n";
+                    } else {
+                        dealer.call(*current);  // BOT will always call
+                        std::cout << current->name << " has called.\n";
+                    }
 
                 } else if (current->name.find("BOT") == std::string::npos) {
                     if (current == dealer.big_blind && dealer.current_bet == dealer.big_blind_value) {
@@ -123,8 +128,14 @@ int main() {
         do {
             if (current->active_bettor == true) {
                 if (current->name.find("BOT") != std::string::npos) {
-                    dealer.call(*current);  // BOT will always call
-                    std::cout << current->name << " has called.\n";
+                    if (dealer.current_bet == current->pot) {
+                        dealer.check(*current);
+                        std::cout << current->name << " has checked.\n";
+                    }
+                    if (dealer.current_bet != current->pot) {
+                        dealer.call(*current);  // BOT will always call
+                        std::cout << current->name << " has called.\n";
+                    }
                 }
 
                 else if (current->name.find("BOT") == std::string::npos) {
@@ -159,8 +170,14 @@ int main() {
         do {
             if (current->active_bettor == true) {
                 if (current->name.find("BOT") != std::string::npos) {
-                    dealer.call(*current);  // BOT will always call
-                    std::cout << current->name << " has called.\n";
+                    if (dealer.current_bet == current->pot) {
+                        dealer.check(*current);
+                        std::cout << current->name << " has checked.\n";
+                    }
+                    if (dealer.current_bet != current->pot) {
+                        dealer.call(*current);  // BOT will always call
+                        std::cout << current->name << " has called.\n";
+                    }
                 }
 
                 else if (current->name.find("BOT") == std::string::npos) {
@@ -195,8 +212,14 @@ int main() {
         do {
             if (current->active_bettor == true) {
                 if (current->name.find("BOT") != std::string::npos) {
-                    dealer.call(*current);  // BOT will always call
-                    std::cout << current->name << " has called.\n";
+                    if (dealer.current_bet == current->pot) {
+                        dealer.check(*current);
+                        std::cout << current->name << " has checked.\n";
+                    }
+                    if (dealer.current_bet != current->pot) {
+                        dealer.call(*current);  // BOT will always call
+                        std::cout << current->name << " has called.\n";
+                    }
                 }
 
                 else if (current->name.find("BOT") == std::string::npos) {
