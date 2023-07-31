@@ -36,7 +36,7 @@ int main() {
                     std::cout << "Enter check, raise, or fold: ";
                     std::getline(std::cin, input_str);
                     if (input_str == "check") {
-                        dealer.takeBet(dealer.players[0], dealer.current_bet);
+                        dealer.check(*current);
                         std::cout << current->name << " has checked.\n";
                     }
                     if (input_str == "fold") {
@@ -49,7 +49,6 @@ int main() {
                         std::string trim = input_str.substr(6);
                         int num = std::stoi(trim);
 						dealer.raise(*current, num);
-                        dealer.takeBet(*current, dealer.current_bet);
                         head = current;
                     }
 
@@ -57,7 +56,7 @@ int main() {
                     std::cout << "Enter check, raise, or fold: ";
                     std::getline(std::cin, input_str);
                     if (input_str == "call") {
-                        dealer.takeBet(dealer.players[0], dealer.current_bet - current->pot);
+                        dealer.call(*current);
                         std::cout << current->name << " has checked.\n";
                     }
                     if (input_str == "fold") {
@@ -70,7 +69,7 @@ int main() {
                         std::string trim = input_str.substr(6);
                         int num = std::stoi(trim);
 						dealer.raise(*current, num);
-                        dealer.takeBet(*current, dealer.current_bet);
+                        //dealer.takeBet(*current, dealer.current_bet);
                         head = current;
                     }
 
@@ -78,7 +77,7 @@ int main() {
                     std::cout << "Enter call, raise, or fold: ";
                     std::getline(std::cin, input_str);
                     if (input_str == "call") {
-                        dealer.takeBet(*current, dealer.current_bet - current->pot);
+                        dealer.call(*current);
                         std::cout << current->name << " has called.\n";
                     }
                     if (input_str == "fold") {
@@ -91,7 +90,7 @@ int main() {
                         std::string trim = input_str.substr(6);
                         int num = std::stoi(trim);
 						dealer.raise(*current, num);
-                        dealer.takeBet(*current, dealer.current_bet);
+                        //dealer.takeBet(*current, dealer.current_bet);
                         head = current;
                     }
                 } else if (current != dealer.small_blind && current != dealer.big_blind) {
@@ -99,7 +98,7 @@ int main() {
                     std::getline(std::cin, input_str);
                     if (input_str == "call") {
                         std::cout << current->name << " has called.\n";
-                        dealer.takeBet(*current, dealer.current_bet - current->pot);
+                        dealer.call(*current);
                     }
                     if (input_str == "fold") {
                         std::cout << current->name << " has folded.\n";
@@ -110,7 +109,7 @@ int main() {
                         std::string trim = input_str.substr(6);
                         int num = std::stoi(trim);
 						dealer.raise(*current, num);
-                        dealer.takeBet(*current, dealer.current_bet);
+                        //dealer.takeBet(*current, dealer.current_bet);
                         head = current;
                     }
                 }
@@ -122,27 +121,6 @@ int main() {
         current = current->next;
     } while (current != head);
 
-    if (head != dealer.start) {
-        while (current != head) {
-            if (current->active_bettor == true) {
-                if (current->name.find("BOT") != std::string::npos) {
-                    if (current == dealer.big_blind && dealer.current_bet == dealer.big_blind_value) {
-                        std::cout << current->name << " has checked.\n";
-                        // do nothing
-                    } else if (current == dealer.big_blind && dealer.current_bet > dealer.big_blind_value) {
-                        std::cout << current->name << " has called.\n";
-                        dealer.takeBet(*current, dealer.current_bet - dealer.big_blind_value);
-                    } else if (current == dealer.small_blind) {
-                        std::cout << current->name << " has called.\n";
-                        dealer.takeBet(*current, dealer.current_bet - dealer.small_blind_value);
-                    } else if (current != dealer.small_blind && current != dealer.big_blind) {
-                        std::cout << current->name << " has called.\n";
-                        dealer.takeBet(*current, dealer.current_bet);
-                    }
-                }
-            }
-        }
-    }
 
     // dealer.fillBoard();
 

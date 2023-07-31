@@ -53,9 +53,6 @@ class Dealer {
             players[0].next = &players[1];
             players[1].next = &players[2];
             players[2].next = &players[0];
-            // for unknown reasons this code doesn't work, so I wrote it out instead
-            // players[players.size() - 2].next = &players[players.size() - 1];
-            // players[players.size() - 1].next = &players[0];
         } else if (players.size() == 3) {
             players.push_back(Player(name));
             players[0].next = &players[1];
@@ -124,30 +121,21 @@ class Dealer {
         }
     }
 
-    void check(Player player) {
+    void check(Player &player) {
+        takeBet(player, current_bet - player.pot);
     }
 
-    void callStart(Player player) {
-        if (player == *big_blind) {
-            takeBet(player, current_bet - big_blind_value);
-        } else if (player == *small_blind) {
-            takeBet(player, current_bet - small_blind_value);
-        } else {
-            takeBet(player, current_bet);
-        }
+    void call(Player &player) {
+        takeBet(player, current_bet - player.pot);
     }
 
-    void call(Player player) {
-        takeBet(player, current_bet);
-    }
+    // void fold(Player &player) {
+    //     player.active_bettor = false;
+    // }
 
-    void fold(Player player) {
-        player.active_bettor = false;
-    }
-
-    void raise(Player player, int val) {
+    void raise(Player &player, int val) {
         current_bet += val;
-        takeBet(player, val);
+        takeBet(player, current_bet);
     }
 
     void takeBlinds() {
