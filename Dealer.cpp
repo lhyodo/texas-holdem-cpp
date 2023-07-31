@@ -129,39 +129,19 @@ class Dealer {
         takeBet(player, current_bet - player.pot);
     }
 
-    // void fold(Player &player) {
-    //     player.active_bettor = false;
-    // }
+    void fold(Player &player) {
+        if (player == *big_blind) {
+            takeBet(player, big_blind_value);
+        }
+        if (player == *small_blind) {
+            takeBet(player, small_blind_value);
+        }
+        player.active_bettor = false;
+    }
 
     void raise(Player &player, int val) {
         current_bet += val;
         takeBet(player, current_bet);
-    }
-
-    void takeBlinds() {
-        current_bet = big_blind_value;
-
-        // small blind
-        if (small_blind->chips <= small_blind_value) {
-            small_blind->pot = small_blind->chips;
-            small_blind->chips = 0;
-            small_blind->all_in = true;
-        }
-        if (small_blind->chips > small_blind_value) {
-            small_blind->pot = small_blind_value;
-            small_blind->chips -= small_blind_value;
-        }
-
-        // big blind
-        if (big_blind->chips <= big_blind_value) {
-            big_blind->pot = big_blind->chips;
-            big_blind->chips = 0;
-            big_blind->all_in = true;
-        }
-        if (big_blind->chips > big_blind_value) {
-            big_blind->pot = big_blind_value;
-            big_blind->chips -= big_blind_value;
-        }
     }
 
     void setBlinds(int small, int big) {
