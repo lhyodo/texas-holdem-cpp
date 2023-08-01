@@ -28,7 +28,7 @@ int main() {
         do {
             if (current->active_bettor == true) {
                 if (current->name.find("BOT") != std::string::npos) {
-                    if (current == dealer.big_blind && dealer.bet_total == dealer.big_blind_value) {
+                    if (current == dealer.big_blind && dealer.bet_amt == dealer.big_blind_value) {
                         dealer.check(*current);
                         std::cout << current->name << " has checked.\n";
                     } else {
@@ -37,7 +37,7 @@ int main() {
                     }
 
                 } else if (current->name.find("BOT") == std::string::npos) {
-                    if (current == dealer.big_blind && dealer.bet_total == dealer.big_blind_value) {
+                    if (current == dealer.big_blind && dealer.bet_amt == dealer.big_blind_value) {
                         std::cout << "Enter check, raise #, or fold: ";
                         std::getline(std::cin, input_str);
                         if (input_str == "check") {
@@ -55,7 +55,7 @@ int main() {
                             head = current;
                         }
 
-                    } else if (current == dealer.big_blind && dealer.bet_total != dealer.big_blind_value) {
+                    } else if (current == dealer.big_blind && dealer.bet_amt != dealer.big_blind_value) {
                         std::cout << "Enter check, raise #, or fold: ";
                         std::getline(std::cin, input_str);
                         if (input_str == "call") {
@@ -125,11 +125,11 @@ int main() {
         do {
             if (current->active_bettor == true) {
                 if (current->name.find("BOT") != std::string::npos) {
-                    if (dealer.bet_total == current->pot) {
+                    if (dealer.bet_amt == current->pot) {
                         dealer.check(*current);
                         std::cout << current->name << " has checked.\n";
                     }
-                    if (dealer.bet_total != current->pot) {
+                    if (dealer.bet_amt != current->pot) {
                         dealer.call(*current);  // BOT will always call
                         std::cout << current->name << " has called.\n";
                     }
@@ -167,11 +167,11 @@ int main() {
         do {
             if (current->active_bettor == true) {
                 if (current->name.find("BOT") != std::string::npos) {
-                    if (dealer.bet_total == current->pot) {
+                    if (dealer.bet_amt == current->pot) {
                         dealer.check(*current);
                         std::cout << current->name << " has checked.\n";
                     }
-                    if (dealer.bet_total != current->pot) {
+                    if (dealer.bet_amt != current->pot) {
                         dealer.call(*current);  // BOT will always call
                         std::cout << current->name << " has called.\n";
                     }
@@ -209,11 +209,11 @@ int main() {
         do {
             if (current->active_bettor == true) {
                 if (current->name.find("BOT") != std::string::npos) {
-                    if (dealer.bet_total == current->pot) {
+                    if (dealer.bet_amt == current->pot) {
                         dealer.check(*current);
                         std::cout << current->name << " has checked.\n";
                     }
-                    if (dealer.bet_total != current->pot) {
+                    if (dealer.bet_amt != current->pot) {
                         dealer.call(*current);  // BOT will always call
                         std::cout << current->name << " has called.\n";
                     }

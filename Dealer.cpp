@@ -29,7 +29,7 @@ class Dealer {
     Card board[BOARD_SIZE];
     int small_blind_value = 50;
     int big_blind_value = 2 * small_blind_value;
-    int bet_total = big_blind_value;
+    int bet_amt = big_blind_value;
     Player *start{};  // the player that bets first
     Player *small_blind{};
     Player *big_blind{};
@@ -122,11 +122,11 @@ class Dealer {
     }
 
     void check(Player &player) {
-        takeBet(player, bet_total - player.pot);
+        takeBet(player, bet_amt - player.pot);
     }
 
     void call(Player &player) {
-        takeBet(player, bet_total - player.pot);
+        takeBet(player, bet_amt - player.pot);
     }
 
     void fold(Player &player) {
@@ -140,8 +140,8 @@ class Dealer {
     }
 
     void raise(Player &player, int val) {
-        bet_total += val;
-        takeBet(player, bet_total - player.pot);
+        bet_amt += val;
+        takeBet(player, bet_amt - player.pot);
     }
 
     void setBlinds(int small, int big) {
@@ -150,11 +150,11 @@ class Dealer {
     }
 
     // void setCurrentBet(int n) {
-    //     bet_total = n;
+    //     bet_amt = n;
     // }
 
     // void addCurrentBet(int n) {
-    //     bet_total += n;
+    //     bet_amt += n;
     // }
 
     void displayDeck() {
