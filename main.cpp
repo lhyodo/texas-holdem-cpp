@@ -45,7 +45,7 @@ int main() {
                             std::cout << current->name << " has checked.\n";
                         }
                         if (input_str == "fold") {
-                            dealer.fold(*current);
+                            dealer.foldStart(*current);
                             std::cout << current->name << " has folded.\n";
                         }
                         if (input_str.find("raise") != std::string::npos) {
@@ -63,7 +63,7 @@ int main() {
                             std::cout << current->name << " has checked.\n";
                         }
                         if (input_str == "fold") {
-                            dealer.fold(*current);
+                            dealer.foldStart(*current);
                             std::cout << current->name << " has folded.\n";
                         }
                         if (input_str.find("raise") != std::string::npos) {
@@ -81,7 +81,7 @@ int main() {
                             std::cout << current->name << " has called.\n";
                         }
                         if (input_str == "fold") {
-                            dealer.fold(*current);
+                            dealer.foldStart(*current);
                             std::cout << current->name << " has folded.\n";
                         }
                         if (input_str.find("raise") != std::string::npos) {
@@ -98,7 +98,7 @@ int main() {
                             dealer.call(*current);
                         }
                         if (input_str == "fold") {
-                            dealer.fold(*current);
+                            dealer.foldStart(*current);
                             std::cout << current->name << " has folded.\n";
                         }
                         if (input_str.find("raise") != std::string::npos) {
@@ -143,7 +143,7 @@ int main() {
                         std::cout << current->name << " has checked.\n";
                     }
                     if (input_str == "fold") {
-                        current->active_bettor = false;
+                        dealer.fold(*current);
                         std::cout << current->name << " has folded.\n";
                     }
                     if (input_str.find("raise") != std::string::npos) {
@@ -185,7 +185,7 @@ int main() {
                         std::cout << current->name << " has checked.\n";
                     }
                     if (input_str == "fold") {
-                        current->active_bettor = false;
+                        dealer.fold(*current);
                         std::cout << current->name << " has folded.\n";
                     }
                     if (input_str.find("raise") != std::string::npos) {
@@ -227,7 +227,7 @@ int main() {
                         std::cout << current->name << " has checked.\n";
                     }
                     if (input_str == "fold") {
-                        current->active_bettor = false;
+                        dealer.fold(*current);
                         std::cout << current->name << " has folded.\n";
                     }
                     if (input_str.find("raise") != std::string::npos) {

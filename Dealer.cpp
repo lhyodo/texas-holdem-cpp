@@ -107,7 +107,7 @@ class Dealer {
         }
     }
 
-    // helper function Player
+    // helper function
     void takeBet(Player &player, int val) {
         if (player.chips <= val) {
             player.pot += player.chips;
@@ -129,13 +129,19 @@ class Dealer {
         takeBet(player, bet_amt - player.pot);
     }
 
-    void fold(Player &player) {
+    // foldStart only used at pre flop bets
+    // fold otherwise is just player.active_bettor
+    void foldStart(Player &player) {
         if (player == *big_blind) {
             takeBet(player, big_blind_value);
         }
         if (player == *small_blind) {
             takeBet(player, small_blind_value);
         }
+        player.active_bettor = false;
+    }
+
+    void fold(Player &player) {
         player.active_bettor = false;
     }
 
@@ -332,8 +338,8 @@ class Dealer {
     }
 
     void assignPoints(Player &player) {
-        bool flag = isPair(player);
-        if (flag) {
+        bool pair_flag = isPair(player);
+        if (pair_flag) {
             player.hand_points = (1 + player.primary_cards[0].getRank()) * 10;
             player.hand_points += 1 + player.secondary_cards[0].getRank();
         } else {  // has nothing, return high card
