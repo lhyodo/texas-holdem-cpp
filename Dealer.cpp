@@ -308,6 +308,10 @@ class Dealer {
         return true;
     }
 
+    bool isStraight(Player &player) {
+
+    }
+
     bool isFourKind(Player &player) {
         // this function is derived from isThreeKind
         Card combined[player.HAND_SIZE + BOARD_SIZE]{};
@@ -504,6 +508,11 @@ class Dealer {
         }
 
         if (num_of_pairs != 2) {
+            return false;
+        }
+
+        bool flush_flag = isFlush(player);
+        if (flush_flag = true) {
             return false;
         }
 
