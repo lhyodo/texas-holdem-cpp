@@ -279,6 +279,35 @@ class Dealer {
         return combined[player.HAND_SIZE + BOARD_SIZE - 1].getRank();
     }
 
+    bool isFlush(Player &player) {
+        Card combined[player.HAND_SIZE + BOARD_SIZE]{};
+        combineCards(player, combined);
+        int suits_sum[4]{};
+        for (int i = 0; i < player.HAND_SIZE + BOARD_SIZE; ++i) {
+            ++suits_sum[combined[i].getSuit()];
+        }
+        bool flush_flag = false;
+        int flush_suit = -1;
+        for (int i = 0; i < 4; ++i) {
+            if (suits_sum[i] >= 5) {
+                flush_flag = true;
+                flush_suit = i;
+            }
+        }
+        if (flush_flag == false) {
+            return false;
+        }
+        for (int i = HAND_SIZE + BOARD_SIZE - 1, primary_cards_index = 0; i >= 0; --i) {
+            if (primary_cards_index == 5) {
+                break;
+            }
+            if (combined[i].getSuit() == flush_suit) {
+                player.primary_cards[primary_cards_index++] = combined[i];
+            }
+        }
+        return true;
+    }
+
     bool isFourKind(Player &player) {
         // this function is derived from isThreeKind
         Card combined[player.HAND_SIZE + BOARD_SIZE]{};
@@ -422,6 +451,10 @@ class Dealer {
             }
         }
         if (num_of_pairs != 1) {
+            return false;
+        }
+        bool flush_flag = isFlush(player);
+        if (flush_flag = true) {
             return false;
         }
 
