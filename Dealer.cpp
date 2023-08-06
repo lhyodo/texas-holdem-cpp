@@ -340,19 +340,7 @@ class Dealer {
 
     // todo
     bool isDoublePair(Player &player) {
-        // This function gets the highest pair and stores it in the first 2 slots of top_five_cards
-        // The next 3 slots are filled with the highest cards in combined_cards
-        // This function does not work if there is a higher combination of cards such as
-        // full house, double pair, flush, straight, etc.
-        // This function will only take the top pair and store it along with the highest 3 cards
-
-        // Append hand cards array with community cards array for ease of coding
-        // In this context combined_cards is hand + community cards
-        // Index of 0 and 1 will be from the hand, 2 to 6 will be the board cards
-
-        // ranks_sum = how many cards there are of each rank
-        // eg cards of "2 of clubs" "4 of hearts" "4 of spades"
-        // ranks_sum = {1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+        // this function is derived from isPair
         Card combined[player.HAND_SIZE + BOARD_SIZE]{};
         combineCards(player, combined);
 
@@ -400,7 +388,7 @@ class Dealer {
             }
         }
 
-        // Fill first 2 slots of primary_cards with the lower pair in raw form
+        // Fill next 2 slots of primary_cards with the lower pair in raw form
         for (int i = player.HAND_SIZE + BOARD_SIZE - 1, primary_cards_index = 2; i >= 0; --i) {
             if (primary_cards_index == 4) {
                 break;
@@ -410,8 +398,6 @@ class Dealer {
                 player.primary_cards[primary_cards_index++] = combined[i];
             }
         }
-
-        
 
         // Fill 1 slots of secondary_cards with highest 1 cards excluding the pairs
         for (int i = player.HAND_SIZE + BOARD_SIZE - 1, secondary_cards_index = 0; i >= 0; --i) {
