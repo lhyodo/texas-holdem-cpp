@@ -279,6 +279,53 @@ class Dealer {
         return combined[player.HAND_SIZE + BOARD_SIZE - 1].getRank();
     }
 
+    bool isFourKind(Player &player) {
+        // this function is derived from isThreeKind
+        Card combined[player.HAND_SIZE + BOARD_SIZE]{};
+        combineCards(player, combined);
+
+        int ranks_sum[13]{};
+        for (int i = 0; i < player.HAND_SIZE + BOARD_SIZE; ++i) {
+            ++ranks_sum[combined[i].getRank()];
+        }
+
+        int four_kind_rank = -1;
+        int num_of_four_kinds = 0;
+        for (int i = 0; i <= 12; ++i) {
+            if (ranks_sum[i] == 4) {
+                ++num_of_four_kinds;
+                four_kind_rank = i;
+            }
+        }
+        if (num_of_four_kinds != 1) {
+            return false;
+        }
+
+        // Fill first 4 slots of primary_cards with the four kind in raw form
+        for (int i = 0, primary_cards_index = 0; i < player.HAND_SIZE + BOARD_SIZE; ++i) {
+            if (primary_cards_index == 4) {
+                break;
+            }
+
+            if (combined[i].getRank() == four_kind_rank) {
+                player.primary_cards[primary_cards_index++] = combined[i];
+            }
+        }
+
+        // Fill 1 slots of secondary_cards with highest 1 cards excluding the four kind
+        for (int i = player.HAND_SIZE + BOARD_SIZE - 1, secondary_cards_index = 0; i >= 0; --i) {
+            if (secondary_cards_index == 1) {
+                break;
+            }
+            if (player.primary_cards[0] == combined[i] || player.primary_cards[1] == combined[i] || player.primary_cards[2] == combined[i] || player.primary_cards[3] == combined[i]) {
+                continue;
+            } else {
+                player.secondary_cards[secondary_cards_index++] = combined[i];
+            }
+        }
+        return true;
+    }
+
     bool isThreeKind(Player &player) {
         // this function is derived from isPair
         Card combined[player.HAND_SIZE + BOARD_SIZE]{};
