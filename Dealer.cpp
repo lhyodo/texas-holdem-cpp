@@ -308,7 +308,6 @@ class Dealer {
         return true;
     }
 
-    // broken
     bool isStraight(Player &player) {
         Card combined[player.HAND_SIZE + BOARD_SIZE]{};
         combineCards(player, combined);
@@ -318,7 +317,7 @@ class Dealer {
         }
         int straight_flag = false;
         int highest_rank_in_straight = -1;
-        for (int i = 12; i >= 0; --i) {
+        for (int i = 12; i >= 4; --i) {
             if (ranks_sum[i] > 0 && ranks_sum[i - 1] > 0 && ranks_sum[i - 2] > 0 && ranks_sum[i - 3] > 0 && ranks_sum[i - 4] > 0) {
                 straight_flag = true;
                 highest_rank_in_straight = i;
