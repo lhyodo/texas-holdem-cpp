@@ -297,11 +297,10 @@ class Dealer {
                 three_kind_rank = i;
             }
         }
-        int num_of_pairs = -1;
+        int num_of_pairs = 0;
         for (int i = 0; i <= 12; ++i) {
             if (ranks_sum[i] == 2) {
                 ++num_of_pairs;
-                three_kind_rank = i;
             }
         }
         if (num_of_three_kinds != 1) {
