@@ -338,7 +338,6 @@ class Dealer {
         return true;
     }
 
-    // todo
     bool isDoublePair(Player &player) {
         // this function is derived from isPair
         Card combined[player.HAND_SIZE + BOARD_SIZE]{};
