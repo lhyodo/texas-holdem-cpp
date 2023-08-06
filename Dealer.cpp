@@ -218,6 +218,7 @@ class Dealer {
         }
     }
 
+    // debug function
     void displayBoard() {
         std::cout << "==============================\n";
         std::cout << "The Board: \n";
@@ -326,6 +327,93 @@ class Dealer {
         // Fill 3 slots of secondary_cards with highest 3 cards excluding the pair
         for (int i = player.HAND_SIZE + BOARD_SIZE - 1, secondary_cards_index = 0; i >= 0; --i) {
             if (secondary_cards_index == 3) {
+                break;
+            }
+            if (player.primary_cards[0] == combined[i] || player.primary_cards[1] == combined[i]) {
+                continue;
+            } else {
+                player.secondary_cards[secondary_cards_index++] = combined[i];
+            }
+        }
+        return true;
+    }
+
+    // todo
+    bool isDoublePair(Player &player) {
+        // This function gets the highest pair and stores it in the first 2 slots of top_five_cards
+        // The next 3 slots are filled with the highest cards in combined_cards
+        // This function does not work if there is a higher combination of cards such as
+        // full house, double pair, flush, straight, etc.
+        // This function will only take the top pair and store it along with the highest 3 cards
+
+        // Append hand cards array with community cards array for ease of coding
+        // In this context combined_cards is hand + community cards
+        // Index of 0 and 1 will be from the hand, 2 to 6 will be the board cards
+
+        // ranks_sum = how many cards there are of each rank
+        // eg cards of "2 of clubs" "4 of hearts" "4 of spades"
+        // ranks_sum = {1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+        Card combined[player.HAND_SIZE + BOARD_SIZE]{};
+        combineCards(player, combined);
+
+        int ranks_sum[13]{};
+        for (int i = 0; i < player.HAND_SIZE + BOARD_SIZE; ++i) {
+            ++ranks_sum[combined[i].getRank()];
+        }
+
+        int pair_rank = -1;
+        int pair_rank_two = -1;
+        int num_of_pairs = 0;
+
+        for (int i = 0; i <= 12; ++i) {
+            if (ranks_sum[i] == 2) {
+                ++num_of_pairs;
+            }
+        }
+
+        if (num_of_pairs != 2) {
+            return false;
+        }
+
+        for (int i = 0; i <= 12; ++i) {
+            if (ranks_sum[i] == 2) {
+                pair_rank = i;
+                break;
+            }
+        }
+
+        for (int i = 12; i >= 0; --i) {
+            if (ranks_sum[i] == 2) {
+                pair_rank_two = i;
+                break;
+            }
+        }
+
+        // Fill first 2 slots of primary_cards with the higher pair in raw form
+        for (int i = player.HAND_SIZE + BOARD_SIZE - 1, primary_cards_index = 0; i >= 0; --i) {
+            if (primary_cards_index == 2) {
+                break;
+            }
+
+            if (combined[i].getRank() == pair_rank) {
+                player.primary_cards[primary_cards_index++] = combined[i];
+            }
+        }
+
+        // Fill first 2 slots of primary_cards with the lower pair in raw form
+        for (int i = 0, primary_cards_index = 2; i < player.HAND_SIZE + BOARD_SIZE; ++i) {
+            if (primary_cards_index == 4) {
+                break;
+            }
+
+            if (combined[i].getRank() == pair_rank_two) {
+                player.primary_cards[primary_cards_index++] = combined[i];
+            }
+        }
+
+        // Fill 1 slots of secondary_cards with highest 1 cards excluding the pairs
+        for (int i = player.HAND_SIZE + BOARD_SIZE - 1, secondary_cards_index = 0; i >= 0; --i) {
+            if (secondary_cards_index == 1) {
                 break;
             }
             if (player.primary_cards[0] == combined[i] || player.primary_cards[1] == combined[i]) {

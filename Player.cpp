@@ -41,6 +41,11 @@ class Player {
         }
     }
 
+    void setHand(int x, int y) {
+        hand[0] = x;
+        hand[1] = y;
+    }
+
     bool operator==(const Player &rhs) const noexcept {
         if (name == rhs.name) {
             return true;
