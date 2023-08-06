@@ -112,8 +112,11 @@ class Card {
         str = "A of ";
         break;
       default:
-        str = "GetCardString-rank-error";
+        // str = "GetCardString-rank-error";
         break;
+    }
+    if (raw_value < 0) {
+      str = "GetCardString-rank-error of ";
     }
     // 0 = clubs, 1 = diamonds, 2 = hearts, 3 = spades
     switch (raw_value % 4) {
