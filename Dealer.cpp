@@ -350,10 +350,19 @@ class Dealer {
                 ++num_of_pairs;
             }
         }
+        int num_of_four_kinds = 0;
+        for (int i = 0; i <= 12; ++i) {
+            if (ranks_sum[i] == 4) {
+                ++num_of_four_kinds;
+            }
+        }
         if (num_of_three_kinds != 1) {
             return false;
         }
         if (num_of_pairs != 0) {
+            return false;
+        }
+        if (num_of_four_kinds != 0) {
             return false;
         }
 
