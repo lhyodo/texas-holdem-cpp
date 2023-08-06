@@ -390,8 +390,19 @@ class Dealer {
         }
 
         // Fill first 2 slots of primary_cards with the higher pair in raw form
-        for (int i = player.HAND_SIZE + BOARD_SIZE - 1, primary_cards_index = 0; i >= 0; --i) {
+        for (int i = 0, primary_cards_index = 0; i < player.HAND_SIZE + BOARD_SIZE; ++i) {
             if (primary_cards_index == 2) {
+                break;
+            }
+
+            if (combined[i].getRank() == pair_rank_two) {
+                player.primary_cards[primary_cards_index++] = combined[i];
+            }
+        }
+
+        // Fill first 2 slots of primary_cards with the lower pair in raw form
+        for (int i = player.HAND_SIZE + BOARD_SIZE - 1, primary_cards_index = 2; i >= 0; --i) {
+            if (primary_cards_index == 4) {
                 break;
             }
 
@@ -400,16 +411,7 @@ class Dealer {
             }
         }
 
-        // Fill first 2 slots of primary_cards with the lower pair in raw form
-        for (int i = 0, primary_cards_index = 2; i < player.HAND_SIZE + BOARD_SIZE; ++i) {
-            if (primary_cards_index == 4) {
-                break;
-            }
-
-            if (combined[i].getRank() == pair_rank_two) {
-                player.primary_cards[primary_cards_index++] = combined[i];
-            }
-        }
+        
 
         // Fill 1 slots of secondary_cards with highest 1 cards excluding the pairs
         for (int i = player.HAND_SIZE + BOARD_SIZE - 1, secondary_cards_index = 0; i >= 0; --i) {
