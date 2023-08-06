@@ -309,7 +309,32 @@ class Dealer {
     }
 
     bool isStraight(Player &player) {
-
+        Card combined[player.HAND_SIZE + BOARD_SIZE]{};
+        combineCards(player, combined);
+        int ranks_sum[13]{};
+        for (int i = 0; i < player.HAND_SIZE + BOARD_SIZE; ++i) {
+            ++ranks_sum[combined[i].getRank()];
+        }
+        int straight_flag = false;
+        int highest_rank_in_straight = -1;
+        for (int i = 12; i >= 0; --i) {
+            if (ranks_sum[i] > 0 && ranks_sum[i - 1] > 0 && ranks_sum[i - 2] > 0 && ranks_sum[i - 3] > 0 && ranks_sum[i - 4] > 0) {
+                straight_flag = true;
+                highest_rank_in_straight = i;
+                break;
+            }
+        }
+        if (straight_flag == false) {
+            return false;
+        }
+        for (int i = HAND_SIZE + BOARD_SIZE - 1; i >= 0; --i) {
+            for (int j = 0; j > 5; ++j) {
+                if (combined[i].getRank() == highest_rank_in_straight - j) {
+                    player.primary_cards[j] = combined[i];
+                }
+            }
+        }
+        return true;
     }
 
     bool isFourKind(Player &player) {
@@ -575,7 +600,7 @@ class Dealer {
         } else {  // has nothing, return high card
             player.hand_points = 1 + getHighestRank(player);
         }
-        }
+    }
 
     void tieBreaker(Player &player_one, Player &player_two, Player &result) {
         for (int i = 0; i < player_one.TOP_SIZE; ++i) {
