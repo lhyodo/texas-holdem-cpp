@@ -279,6 +279,63 @@ class Dealer {
         return combined[player.HAND_SIZE + BOARD_SIZE - 1].getRank();
     }
 
+    bool isThreeKind(Player &player) {
+        // this function is derived from isPair
+        Card combined[player.HAND_SIZE + BOARD_SIZE]{};
+        combineCards(player, combined);
+
+        int ranks_sum[13]{};
+        for (int i = 0; i < player.HAND_SIZE + BOARD_SIZE; ++i) {
+            ++ranks_sum[combined[i].getRank()];
+        }
+
+        int three_kind_rank = -1;
+        int num_of_three_kinds = 0;
+        for (int i = 0; i <= 12; ++i) {
+            if (ranks_sum[i] == 3) {
+                ++num_of_three_kinds;
+                three_kind_rank = i;
+            }
+        }
+        int num_of_pairs = -1;
+        for (int i = 0; i <= 12; ++i) {
+            if (ranks_sum[i] == 2) {
+                ++num_of_pairs;
+                three_kind_rank = i;
+            }
+        }
+        if (num_of_three_kinds != 1) {
+            return false;
+        }
+        if (num_of_pairs != 0) {
+            return false;
+        }
+
+        // Fill first 3 slots of primary_cards with the three kind in raw form
+        for (int i = 0, primary_cards_index = 0; i < player.HAND_SIZE + BOARD_SIZE; ++i) {
+            if (primary_cards_index == 3) {
+                break;
+            }
+
+            if (combined[i].getRank() == three_kind_rank) {
+                player.primary_cards[primary_cards_index++] = combined[i];
+            }
+        }
+
+        // Fill 2 slots of secondary_cards with highest 2 cards excluding the three kind
+        for (int i = player.HAND_SIZE + BOARD_SIZE - 1, secondary_cards_index = 0; i >= 0; --i) {
+            if (secondary_cards_index == 2) {
+                break;
+            }
+            if (player.primary_cards[0] == combined[i] || player.primary_cards[1] == combined[i] || player.primary_cards[2] == combined[i]) {
+                continue;
+            } else {
+                player.secondary_cards[secondary_cards_index++] = combined[i];
+            }
+        }
+        return true;
+    }
+
     bool isPair(Player &player) {
         // This function gets the highest pair and stores it in the first 2 slots of top_five_cards
         // The next 3 slots are filled with the highest cards in combined_cards
@@ -414,13 +471,14 @@ class Dealer {
 
     void assignPoints(Player &player) {
         bool pair_flag = isPair(player);
+        bool dpair_flag = isDoublePair(player);
         if (pair_flag) {
             player.hand_points = (1 + player.primary_cards[0].getRank()) * 10;
             player.hand_points += 1 + player.secondary_cards[0].getRank();
         } else {  // has nothing, return high card
             player.hand_points = 1 + getHighestRank(player);
         }
-    }
+        }
 
     void tieBreaker(Player &player_one, Player &player_two, Player &result) {
         for (int i = 0; i < player_one.TOP_SIZE; ++i) {
