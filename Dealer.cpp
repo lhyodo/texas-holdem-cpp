@@ -308,6 +308,7 @@ class Dealer {
         return true;
     }
 
+    // broken
     bool isStraight(Player &player) {
         Card combined[player.HAND_SIZE + BOARD_SIZE]{};
         combineCards(player, combined);
@@ -327,8 +328,12 @@ class Dealer {
         if (straight_flag == false) {
             return false;
         }
+        bool flush_flag = isFlush(player);
+        if (flush_flag == true) {
+            return false;
+        }
         for (int i = HAND_SIZE + BOARD_SIZE - 1; i >= 0; --i) {
-            for (int j = 0; j > 5; ++j) {
+            for (int j = 0; j < 5; ++j) {
                 if (combined[i].getRank() == highest_rank_in_straight - j) {
                     player.primary_cards[j] = combined[i];
                 }
