@@ -418,7 +418,7 @@ class Dealer {
             if (secondary_cards_index == 1) {
                 break;
             }
-            if (player.primary_cards[0] == combined[i] || player.primary_cards[1] == combined[i]) {
+            if (player.primary_cards[0] == combined[i] || player.primary_cards[1] == combined[i] || player.primary_cards[2] == combined[i] || player.primary_cards[3] == combined[i]) {
                 continue;
             } else {
                 player.secondary_cards[secondary_cards_index++] = combined[i];
