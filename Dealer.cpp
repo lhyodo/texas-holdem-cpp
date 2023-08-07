@@ -671,8 +671,8 @@ class Dealer {
             ++ranks_sum[combined[i].getRank()];
         }
 
-        int pair_rank = -1;
-        int pair_rank_two = -1;
+        int higher_pair_rank = -1;
+        int lower_pair_rank = -1;
         int num_of_pairs = 0;
 
         for (int i = 0; i <= 12; ++i) {
@@ -709,16 +709,15 @@ class Dealer {
             return false;
         }
 
-        for (int i = 0; i <= 12; ++i) {
+        for (int i = 12; i >= 0; --i) {
             if (ranks_sum[i] == 2) {
-                pair_rank = i;
+                higher_pair_rank = i;
                 break;
             }
         }
-
-        for (int i = 12; i >= 0; --i) {
+        for (int i = higher_pair_rank - 1; i >= 0; --i) {
             if (ranks_sum[i] == 2) {
-                pair_rank_two = i;
+                lower_pair_rank = i;
                 break;
             }
         }
@@ -729,7 +728,7 @@ class Dealer {
                 break;
             }
 
-            if (combined[i].getRank() == pair_rank_two) {
+            if (combined[i].getRank() == higher_pair_rank) {
                 player.primary_cards[primary_cards_index++] = combined[i];
             }
         }
@@ -740,7 +739,7 @@ class Dealer {
                 break;
             }
 
-            if (combined[i].getRank() == pair_rank) {
+            if (combined[i].getRank() == lower_pair_rank) {
                 player.primary_cards[primary_cards_index++] = combined[i];
             }
         }
