@@ -22,6 +22,7 @@ class Player {
     Card secondary_cards[TOP_SIZE]{};
     Card hand[HAND_SIZE]{};
     Player() {
+        name = "unnamed";
         for (int i = 0; i < TOP_SIZE; ++i) {
             primary_cards[i].setCard(-1);
             secondary_cards[i].setCard(-1);
