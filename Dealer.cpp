@@ -310,7 +310,7 @@ class Dealer {
         if (isStraightHelper_flag == false) {
             return false;
         }
-        for(int i = 0; i < TOP_SIZE; ++i) {
+        for (int i = 0; i < TOP_SIZE; ++i) {
             player.primary_cards[i] = straight_flush_cards[i];
         }
 
@@ -462,6 +462,72 @@ class Dealer {
                 continue;
             } else {
                 player.secondary_cards[secondary_cards_index++] = combined[i];
+            }
+        }
+        return true;
+    }
+
+    bool isFullHouse(Player &player) {
+        // this function is derived from isThreeKind
+        Card combined[player.HAND_SIZE + BOARD_SIZE]{};
+        combineCards(player, combined);
+
+        int ranks_sum[13]{};
+        for (int i = 0; i < player.HAND_SIZE + BOARD_SIZE; ++i) {
+            ++ranks_sum[combined[i].getRank()];
+        }
+
+        int num_of_three_kinds = 0;
+        int three_kind_rank = -1;
+        for (int i = 0; i <= 12; ++i) {
+            if (ranks_sum[i] == 3) {
+                ++num_of_three_kinds;
+                three_kind_rank = i;
+            }
+        }
+        int num_of_pairs = 0;
+        int pair_rank = -1;
+        for (int i = 0; i <= 12; ++i) {
+            if (ranks_sum[i] == 2) {
+                ++num_of_pairs;
+                pair_rank = i;
+            }
+        }
+        int num_of_four_kinds = 0;
+        for (int i = 0; i <= 12; ++i) {
+            if (ranks_sum[i] == 4) {
+                ++num_of_four_kinds;
+            }
+        }
+        if (num_of_three_kinds != 1) {
+            return false;
+        }
+        if (num_of_pairs != 1) {
+            return false;
+        }
+        if (num_of_four_kinds != 0) {
+            return false;
+        }
+
+        // Fill first 3 slots of primary_cards with the three kind in raw form
+        for (int i = 0, primary_cards_index = 0; i < player.HAND_SIZE + BOARD_SIZE; ++i) {
+            if (primary_cards_index == 3) {
+                break;
+            }
+
+            if (combined[i].getRank() == three_kind_rank) {
+                player.primary_cards[primary_cards_index++] = combined[i];
+            }
+        }
+
+        // Fill next 2 slots of primary_cards with pair in raw form
+        for (int i = 0, primary_cards_index = 3; i < player.HAND_SIZE + BOARD_SIZE; ++i) {
+            if (primary_cards_index == 5) {
+                break;
+            }
+
+            if (combined[i].getRank() == pair_rank) {
+                player.primary_cards[primary_cards_index++] = combined[i];
             }
         }
         return true;
