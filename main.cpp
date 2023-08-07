@@ -244,8 +244,21 @@ int main() {
             current = current->next;
         } while (current != head);
 
+        // show hands
+        std::cout << "Showing hands: \n";
+        
+
         // calculate and decide winner
         dealer.assignPoints();
+        if (dealer.players[0].hand_points >= dealer.players[1].hand_points && dealer.players[0].hand_points >= dealer.players[2].hand_points) {
+            std::cout << "You win!\n";
+        }
+        if (dealer.players[1].hand_points >= dealer.players[0].hand_points && dealer.players[1].hand_points >= dealer.players[2].hand_points) {
+            std::cout << dealer.players[1].name << " wins.\n";
+        }
+        if (dealer.players[2].hand_points >= dealer.players[0].hand_points && dealer.players[2].hand_points >= dealer.players[1].hand_points) {
+            std::cout << dealer.players[1].name << " wins.\n";
+        }
 
         // end
         dealer.roundReset();
