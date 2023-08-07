@@ -41,6 +41,10 @@ class Player {
         }
     }
 
+    int getTopSize() {
+        return TOP_SIZE;
+    }
+
     void setHand(int x, int y) {
         hand[0] = x;
         hand[1] = y;
