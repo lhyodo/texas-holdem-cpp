@@ -370,6 +370,10 @@ class Dealer {
         if (flush_flag == true) {
             return false;
         }
+        bool is_straight_flush_flag = isStraightFlush(player);
+        if (is_straight_flush_flag == true) {
+            return false;
+        }
         for (int i = HAND_SIZE + BOARD_SIZE - 1; i >= 0; --i) {
             for (int j = 0; j < 5; ++j) {
                 if (combined[i].getRank() == highest_rank_in_straight - j) {
@@ -399,6 +403,11 @@ class Dealer {
         if (flush_flag == false) {
             return false;
         }
+        bool straight_flush_flag = isStraightFlush(player);
+        if (straight_flush_flag == true) {
+            return false;
+        }
+
         for (int i = HAND_SIZE + BOARD_SIZE - 1, primary_cards_index = 0; i >= 0; --i) {
             if (primary_cards_index == 5) {
                 break;
