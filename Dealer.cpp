@@ -536,9 +536,11 @@ class Dealer {
         if (num_of_three_kinds < 1) {
             return false;
         }
-        if (num_of_pairs != 1) {
+
+        if (num_of_pairs != 1 && num_of_three_kinds < 2) {
             return false;
         }
+
         if (num_of_four_kinds != 0) {
             return false;
         }
