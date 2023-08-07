@@ -171,13 +171,23 @@ class Dealer {
     }
 
     void displayHand(Player &player) {
-        std::cout << "------------------------------\n";
-        std::cout << "Your Hand:\n";
-        for (int i = 0; i < player.HAND_SIZE; ++i) {
-            Card foo = player.hand[i];
-            std::cout << foo.getCardString() << std::endl;
+        if (player.name == "Player") {
+            std::cout << "------------------------------\n";
+            std::cout << "Your Hand:\n";
+            for (int i = 0; i < player.HAND_SIZE; ++i) {
+                Card foo = player.hand[i];
+                std::cout << foo.getCardString() << std::endl;
+            }
+            std::cout << "------------------------------\n";
+        } else {
+            std::cout << "------------------------------\n";
+            std::cout << player.name <<"'s Hand: \n";
+            for (int i = 0; i < player.HAND_SIZE; ++i) {
+                Card foo = player.hand[i];
+                std::cout << foo.getCardString() << std::endl;
+            }
+            std::cout << "------------------------------\n";
         }
-        std::cout << "------------------------------\n";
     }
 
     void fillHands() {
