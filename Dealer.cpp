@@ -499,10 +499,19 @@ class Dealer {
 
         int num_of_three_kinds = 0;
         int three_kind_rank = -1;
-        for (int i = 0; i <= 12; ++i) {
+        int lower_three_kind_rank = -1;
+        for (int i = 12; i >= 0; --i) {
             if (ranks_sum[i] == 3) {
                 ++num_of_three_kinds;
                 three_kind_rank = i;
+                break;
+            }
+        }
+        for (int i = three_kind_rank - 1; i >= 0; --i) {
+            if (ranks_sum[i] == 3) {
+                ++num_of_three_kinds;
+                lower_three_kind_rank = i;
+                break;
             }
         }
         int num_of_pairs = 0;
@@ -513,13 +522,18 @@ class Dealer {
                 pair_rank = i;
             }
         }
+        if (num_of_three_kinds == 2) {
+            if (lower_three_kind_rank > pair_rank) {
+                pair_rank = lower_three_kind_rank;
+            }
+        }
         int num_of_four_kinds = 0;
         for (int i = 0; i <= 12; ++i) {
             if (ranks_sum[i] == 4) {
                 ++num_of_four_kinds;
             }
         }
-        if (num_of_three_kinds != 1) {
+        if (num_of_three_kinds < 1) {
             return false;
         }
         if (num_of_pairs != 1) {
@@ -536,6 +550,7 @@ class Dealer {
         if (sflush_flag == true) {
             return false;
         }
+
 
         // Fill first 3 slots of primary_cards with the three kind in raw form
         for (int i = 0, primary_cards_index = 0; i < player.HAND_SIZE + BOARD_SIZE; ++i) {
