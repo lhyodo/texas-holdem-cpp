@@ -279,7 +279,8 @@ class Dealer {
         return combined[player.HAND_SIZE + BOARD_SIZE - 1].getRank();
     }
 
-    bool isFlush(Player &player) {
+    bool isStraightFlush(Player &player) {
+        // this function is derived from isFlush
         Card combined[player.HAND_SIZE + BOARD_SIZE]{};
         combineCards(player, combined);
         int suits_sum[4]{};
@@ -297,13 +298,51 @@ class Dealer {
         if (flush_flag == false) {
             return false;
         }
-        for (int i = HAND_SIZE + BOARD_SIZE - 1, primary_cards_index = 0; i >= 0; --i) {
-            if (primary_cards_index == 5) {
+        Card same_suit[HAND_SIZE + BOARD_SIZE]{};
+        for (int i = HAND_SIZE + BOARD_SIZE - 1, j = 0; i >= 0; --i) {
+            if (combined[i].getSuit() == flush_suit) {
+                same_suit[j++] = combined[i];
+            }
+        }
+        Card straight_flush_cards[5]{};
+        bool isStraightHelper_flag = isStraightHelper(same_suit, straight_flush_cards);
+        if (isStraightHelper_flag == false) {
+            return false;
+        }
+        for(int i = 0; i < 5; ++i) {
+            player.primary_cards[i] = straight_flush_cards[i];
+        }
+
+        return true;
+    }
+
+    bool isStraightHelper(Card cards[HAND_SIZE + BOARD_SIZE], Card straight_flush_cards[5]) {
+        int ranks_sum[13]{};
+        for (int i = 0; i < HAND_SIZE + BOARD_SIZE; ++i) {
+            ++ranks_sum[cards[i].getRank()];
+        }
+        int straight_flag = false;
+        int highest_rank_in_straight = -1;
+        for (int i = 12; i >= 4; --i) {
+            if (ranks_sum[i] > 0 && ranks_sum[i - 1] > 0 && ranks_sum[i - 2] > 0 && ranks_sum[i - 3] > 0 && ranks_sum[i - 4] > 0) {
+                straight_flag = true;
+                highest_rank_in_straight = i;
                 break;
             }
-            if (combined[i].getSuit() == flush_suit) {
-                player.primary_cards[primary_cards_index++] = combined[i];
+        }
+        if (straight_flag == false) {
+            return false;
+        }
+        Card flush_cards[7]{};
+        for (int i = HAND_SIZE + BOARD_SIZE - 1; i >= 0; --i) {
+            for (int j = 0; j < 5; ++j) {
+                if (cards[i].getRank() == highest_rank_in_straight - j) {
+                    flush_cards[j] = cards[i];
+                }
             }
+        }
+        for (int i = 0; i < 5; ++i) {
+            straight_flush_cards[i] = flush_cards[i];
         }
         return true;
     }
@@ -336,6 +375,36 @@ class Dealer {
                 if (combined[i].getRank() == highest_rank_in_straight - j) {
                     player.primary_cards[j] = combined[i];
                 }
+            }
+        }
+
+        return true;
+    }
+
+    bool isFlush(Player &player) {
+        Card combined[player.HAND_SIZE + BOARD_SIZE]{};
+        combineCards(player, combined);
+        int suits_sum[4]{};
+        for (int i = 0; i < player.HAND_SIZE + BOARD_SIZE; ++i) {
+            ++suits_sum[combined[i].getSuit()];
+        }
+        bool flush_flag = false;
+        int flush_suit = -1;
+        for (int i = 0; i < 4; ++i) {
+            if (suits_sum[i] >= 5) {
+                flush_flag = true;
+                flush_suit = i;
+            }
+        }
+        if (flush_flag == false) {
+            return false;
+        }
+        for (int i = HAND_SIZE + BOARD_SIZE - 1, primary_cards_index = 0; i >= 0; --i) {
+            if (primary_cards_index == 5) {
+                break;
+            }
+            if (combined[i].getSuit() == flush_suit) {
+                player.primary_cards[primary_cards_index++] = combined[i];
             }
         }
         return true;
