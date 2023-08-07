@@ -245,6 +245,7 @@ int main() {
         } while (current != head);
 
         // calculate and decide winner
+        dealer.assignPoints();
 
         // end
         dealer.roundReset();

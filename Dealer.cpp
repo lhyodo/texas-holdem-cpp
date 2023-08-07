@@ -553,7 +553,6 @@ class Dealer {
             return false;
         }
 
-
         // Fill first 3 slots of primary_cards with the three kind in raw form
         for (int i = 0, primary_cards_index = 0; i < player.HAND_SIZE + BOARD_SIZE; ++i) {
             if (primary_cards_index == 3) {
@@ -839,33 +838,35 @@ class Dealer {
         return true;
     }
 
-    void assignPoints(Player &player) {
-        bool pair_flag = isPair(player);
-        bool dpair_flag = isDoublePair(player);
-        bool tkind_flag = isThreeKind(player);
-        bool straight_flag = isStraight(player);
-        bool flush_flag = isFlush(player);
-        bool fhouse_flag = isFullHouse(player);
-        bool fkind_flag = isFourKind(player);
-        bool sflush_flag = isStraightFlush(player);
-        if (pair_flag) {
-            player.hand_points = (1 + player.primary_cards[0].getRank()) * 10;
-        } else if (dpair_flag) {
-            player.hand_points = (1 + player.primary_cards[0].getRank()) * 100;
-        } else if (tkind_flag) {
-            player.hand_points = (1 + player.primary_cards[0].getRank()) * 1000;
-        } else if (straight_flag) {
-            player.hand_points = (1 + player.primary_cards[0].getRank()) * 10000;
-        } else if (flush_flag) {
-            player.hand_points = (1 + player.primary_cards[0].getRank()) * 100000;
-        } else if (fhouse_flag) {
-            player.hand_points = (1 + player.primary_cards[0].getRank()) * 1000000;
-        } else if (fkind_flag) {
-            player.hand_points = (1 + player.primary_cards[0].getRank()) * 10000000;
-        } else if (sflush_flag) {
-            player.hand_points = (1 + player.primary_cards[0].getRank()) * 100000000;
-        } else {  // has nothing, return high card
-            player.hand_points = 1 + getHighestRank(player);
+    void assignPoints() {
+        for (auto i = players.begin(); i != players.end(); ++i) {
+            bool pair_flag = isPair(*i);
+            bool dpair_flag = isDoublePair(*i);
+            bool tkind_flag = isThreeKind(*i);
+            bool straight_flag = isStraight(*i);
+            bool flush_flag = isFlush(*i);
+            bool fhouse_flag = isFullHouse(*i);
+            bool fkind_flag = isFourKind(*i);
+            bool sflush_flag = isStraightFlush(*i);
+            if (pair_flag) {
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 10;
+            } else if (dpair_flag) {
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 100;
+            } else if (tkind_flag) {
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 1000;
+            } else if (straight_flag) {
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 10000;
+            } else if (flush_flag) {
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 100000;
+            } else if (fhouse_flag) {
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 1000000;
+            } else if (fkind_flag) {
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 10000000;
+            } else if (sflush_flag) {
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 100000000;
+            } else {  // has nothing, return high card
+                (*i).hand_points = 1 + getHighestRank(*i);
+            }
         }
     }
 
