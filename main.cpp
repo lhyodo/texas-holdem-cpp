@@ -255,36 +255,33 @@ int main() {
 
         // calculate and decide winner
         dealer.assignPoints();
-        if (dealer.players[0].hand_points == dealer.players[1].hand_points || dealer.players[0].hand_points == dealer.players[2].hand_points) {
-            bool isdp = dealer.isDoublePair(dealer.players[0]);
-            if (isdp == true) {
-                if (dealer.players[0].primary_cards[3].getRank() >= dealer.players[1].primary_cards[3].getRank() && dealer.players[0].primary_cards[3].getRank() >= dealer.players[2].primary_cards[3].getRank()) {
-                    std::cout << "You win!\n";
-                }
-            } else {
-                std::cout << "You win!\n";
-            }
+        for (auto i = dealer.players.begin(); i != dealer.players.end(); ++i) {
+            std::cout << (*i).name << "'s hand points: " << (*i).hand_points << std::endl;
         }
-        if (dealer.players[1].hand_points == dealer.players[0].hand_points || dealer.players[1].hand_points == dealer.players[2].hand_points) {
-            bool isdp = dealer.isDoublePair(dealer.players[0]);
-            if (isdp == true) {
-                if (dealer.players[1].primary_cards[3].getRank() >= dealer.players[0].primary_cards[3].getRank() && dealer.players[1].primary_cards[3].getRank() >= dealer.players[2].primary_cards[3].getRank()) {
-                    std::cout << dealer.players[1].name << " wins.\n";
-                }
-            } else {
-                std::cout << dealer.players[1].name << " wins.\n";
-            }
+
+        std::string win_msg{};
+
+        if (dealer.players[0].hand_points > dealer.players[1].hand_points && dealer.players[0].hand_points > dealer.players[2].hand_points) {
+            win_msg = "You win!\n";
+        } else if (dealer.players[1].hand_points > dealer.players[0].hand_points && dealer.players[1].hand_points > dealer.players[2].hand_points) {
+            win_msg = dealer.players[1].name + " wins.\n";
+        } else if (dealer.players[2].hand_points > dealer.players[0].hand_points && dealer.players[2].hand_points > dealer.players[1].hand_points) {
+            win_msg = dealer.players[2].name + " wins.\n";
+        } else if (dealer.players[0].hand_points == dealer.players[1].hand_points && dealer.players[0].hand_points == dealer.players[2].hand_points) {
+            win_msg = "You win!\n";
+            win_msg += dealer.players[1].name + " wins.\n";
+            win_msg += dealer.players[2].name + " wins.\n";
+        } else if (dealer.players[0].hand_points == dealer.players[1].hand_points) {
+            win_msg = "You win!\n";
+            win_msg += dealer.players[1].name + " wins.\n";
+        } else if (dealer.players[0].hand_points == dealer.players[2].hand_points) {
+            win_msg = "You win!\n";
+            win_msg += dealer.players[2].name + " wins.\n";
+        } else if (dealer.players[1].hand_points == dealer.players[2].hand_points) {
+            win_msg = dealer.players[1].name + " wins.\n";
+            win_msg += dealer.players[2].name + " wins.\n";
         }
-        if (dealer.players[2].hand_points >= dealer.players[0].hand_points && dealer.players[2].hand_points >= dealer.players[1].hand_points) {
-            bool isdp = dealer.isDoublePair(dealer.players[0]);
-            if (isdp == true) {
-                if (dealer.players[2].hand[3] >= dealer.players[0].hand[3] && dealer.players[2].hand[3] >= dealer.players[1].hand[3]) {
-                    std::cout << dealer.players[1].name << " wins.\n";
-                }
-            } else {
-                std::cout << dealer.players[1].name << " wins.\n";
-            }
-        }
+        std::cout << win_msg;
 
         // end
         dealer.roundReset();
