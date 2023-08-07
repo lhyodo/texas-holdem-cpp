@@ -255,14 +255,35 @@ int main() {
 
         // calculate and decide winner
         dealer.assignPoints();
-        if (dealer.players[0].hand_points >= dealer.players[1].hand_points && dealer.players[0].hand_points >= dealer.players[2].hand_points) {
-            std::cout << "You win!\n";
+        if (dealer.players[0].hand_points == dealer.players[1].hand_points || dealer.players[0].hand_points == dealer.players[2].hand_points) {
+            bool isdp = dealer.isDoublePair(dealer.players[0]);
+            if (isdp == true) {
+                if (dealer.players[0].primary_cards[3].getRank() >= dealer.players[1].primary_cards[3].getRank() && dealer.players[0].primary_cards[3].getRank() >= dealer.players[2].primary_cards[3].getRank()) {
+                    std::cout << "You win!\n";
+                }
+            } else {
+                std::cout << "You win!\n";
+            }
         }
-        if (dealer.players[1].hand_points >= dealer.players[0].hand_points && dealer.players[1].hand_points >= dealer.players[2].hand_points) {
-            std::cout << dealer.players[1].name << " wins.\n";
+        if (dealer.players[1].hand_points == dealer.players[0].hand_points || dealer.players[1].hand_points == dealer.players[2].hand_points) {
+            bool isdp = dealer.isDoublePair(dealer.players[0]);
+            if (isdp == true) {
+                if (dealer.players[1].primary_cards[3].getRank() >= dealer.players[0].primary_cards[3].getRank() && dealer.players[1].primary_cards[3].getRank() >= dealer.players[2].primary_cards[3].getRank()) {
+                    std::cout << dealer.players[1].name << " wins.\n";
+                }
+            } else {
+                std::cout << dealer.players[1].name << " wins.\n";
+            }
         }
         if (dealer.players[2].hand_points >= dealer.players[0].hand_points && dealer.players[2].hand_points >= dealer.players[1].hand_points) {
-            std::cout << dealer.players[1].name << " wins.\n";
+            bool isdp = dealer.isDoublePair(dealer.players[0]);
+            if (isdp == true) {
+                if (dealer.players[2].hand[3] >= dealer.players[0].hand[3] && dealer.players[2].hand[3] >= dealer.players[1].hand[3]) {
+                    std::cout << dealer.players[1].name << " wins.\n";
+                }
+            } else {
+                std::cout << dealer.players[1].name << " wins.\n";
+            }
         }
 
         // end

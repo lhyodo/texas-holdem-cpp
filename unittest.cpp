@@ -14,15 +14,15 @@ int main() {
     dealer.initBlinds();
     dealer.setBlinds(50, 100);
 
-    dealer.players[0].hand[0] = 14;
-    dealer.players[0].hand[1] = 13;
-    dealer.players[1].hand[0] = 22;
-    dealer.players[1].hand[1] = 49;
-    dealer.board[0] = 6;
-    dealer.board[1] = 12;
-    dealer.board[2] = 22;
-    dealer.board[3] = 21;
-    dealer.board[4] = 20;
+    dealer.players[0].hand[0] = 11;
+    dealer.players[0].hand[1] = 47;
+    dealer.players[1].hand[0] = 13;
+    dealer.players[1].hand[1] = 19;
+    dealer.board[0] = 33;
+    dealer.board[1] = 8;
+    dealer.board[2] = 35;
+    dealer.board[3] = 51;
+    dealer.board[4] = 14;
 
     dealer.displayHand(dealer.players[0]);
     dealer.displayBoard();
@@ -58,11 +58,30 @@ int main() {
         std::cout << foo << std::endl;
     }
     std::cout << "\n==================================================\n\n";
-    dealer.assignPoints(dealer.players[0]);
+    dealer.assignPoints();
     std::cout << "Your points:  " << dealer.players[0].hand_points << '\n';
-
-    dealer.assignPoints(dealer.players[1]);
     std::cout << "BOT's points: " << dealer.players[1].hand_points << '\n';
+
+    if (dealer.players[0].hand_points == dealer.players[1].hand_points) {
+        bool isdp = dealer.isDoublePair(dealer.players[0]);
+        if (isdp == true) {
+            if (dealer.players[0].primary_cards[3].getRank() >= dealer.players[1].primary_cards[3].getRank()) {
+                std::cout << "You win!\n";
+            }
+        } else {
+            std::cout << "You win!\n";
+        }
+    }
+    if (dealer.players[1].hand_points == dealer.players[0].hand_points) {
+        bool isdp = dealer.isDoublePair(dealer.players[0]);
+        if (isdp == true) {
+            if (dealer.players[1].primary_cards[3].getRank() >= dealer.players[0].primary_cards[3].getRank()) {
+                std::cout << dealer.players[1].name << " wins.\n";
+            }
+        } else {
+            std::cout << dealer.players[1].name << " wins.\n";
+        }
+    }
 
     return 0;
 }
