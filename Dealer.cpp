@@ -371,8 +371,16 @@ class Dealer {
         if (flush_flag == true) {
             return false;
         }
-        bool is_straight_flush_flag = isStraightFlush(player);
-        if (is_straight_flush_flag == true) {
+        bool fhouse_flag = isFullHouse(player);
+        if (fhouse_flag == true) {
+            return false;
+        }
+        bool fkind_flag = isFourKind(player);
+        if (fkind_flag == true) {
+            return false;
+        }
+        bool sflush_flag = isStraightFlush(player);
+        if (sflush_flag == true) {
             return false;
         }
         for (int i = HAND_SIZE + BOARD_SIZE - 1; i >= 0; --i) {
@@ -404,8 +412,16 @@ class Dealer {
         if (flush_flag == false) {
             return false;
         }
-        bool straight_flush_flag = isStraightFlush(player);
-        if (straight_flush_flag == true) {
+        bool fhouse_flag = isFullHouse(player);
+        if (fhouse_flag == true) {
+            return false;
+        }
+        bool fkind_flag = isFourKind(player);
+        if (fkind_flag == true) {
+            return false;
+        }
+        bool sflush_flag = isStraightFlush(player);
+        if (sflush_flag == true) {
             return false;
         }
 
@@ -439,6 +455,10 @@ class Dealer {
             }
         }
         if (num_of_four_kinds != 1) {
+            return false;
+        }
+        bool sflush_flag = isStraightFlush(player);
+        if (sflush_flag == true) {
             return false;
         }
 
@@ -508,6 +528,14 @@ class Dealer {
         if (num_of_four_kinds != 0) {
             return false;
         }
+        bool fkind_flag = isFourKind(player);
+        if (fkind_flag == true) {
+            return false;
+        }
+        bool sflush_flag = isStraightFlush(player);
+        if (sflush_flag == true) {
+            return false;
+        }
 
         // Fill first 3 slots of primary_cards with the three kind in raw form
         for (int i = 0, primary_cards_index = 0; i < player.HAND_SIZE + BOARD_SIZE; ++i) {
@@ -572,6 +600,18 @@ class Dealer {
         if (num_of_four_kinds != 0) {
             return false;
         }
+        bool straight_flag = isStraight(player);
+        if (straight_flag == true) {
+            return false;
+        }
+        bool flush_flag = isFlush(player);
+        if (flush_flag == true) {
+            return false;
+        }
+        bool sflush_flag = isStraightFlush(player);
+        if (sflush_flag == true) {
+            return false;
+        }
 
         // Fill first 3 slots of primary_cards with the three kind in raw form
         for (int i = 0, primary_cards_index = 0; i < player.HAND_SIZE + BOARD_SIZE; ++i) {
@@ -631,8 +671,32 @@ class Dealer {
         if (num_of_pairs != 1) {
             return false;
         }
+        bool dpair_flag = isDoublePair(player);
+        if (dpair_flag == true) {
+            return false;
+        }
+        bool tkind_flag = isThreeKind(player);
+        if (tkind_flag == true) {
+            return false;
+        }
+        bool straight_flag = isStraight(player);
+        if (straight_flag == true) {
+            return false;
+        }
         bool flush_flag = isFlush(player);
-        if (flush_flag = true) {
+        if (flush_flag == true) {
+            return false;
+        }
+        bool fhouse_flag = isFullHouse(player);
+        if (fhouse_flag == true) {
+            return false;
+        }
+        bool fkind_flag = isFourKind(player);
+        if (fkind_flag == true) {
+            return false;
+        }
+        bool sflush_flag = isStraightFlush(player);
+        if (sflush_flag == true) {
             return false;
         }
 
