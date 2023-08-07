@@ -859,21 +859,24 @@ class Dealer {
             bool fkind_flag = isFourKind(*i);
             bool sflush_flag = isStraightFlush(*i);
             if (pair_flag) {
-                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 10;
-            } else if (dpair_flag) {
-                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 100;
-            } else if (tkind_flag) {
                 (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 1000;
-            } else if (straight_flag) {
-                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 10000;
-            } else if (flush_flag) {
+            } else if (dpair_flag) {
                 (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 100000;
-            } else if (fhouse_flag) {
-                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 1000000;
-            } else if (fkind_flag) {
+                (*i).hand_points += (1 + (*i).primary_cards[3].getRank()) * 10;
+                (*i).hand_points += (1 + (*i).secondary_cards[0].getRank());
+            } else if (tkind_flag) {
                 (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 10000000;
+            } else if (straight_flag) {
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 1000000000;
+            } else if (flush_flag) {
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 100000000000;
+            } else if (fhouse_flag) {
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 10000000000000;
+                (*i).hand_points += (1 + (*i).primary_cards[4].getRank()) * 10;
+            } else if (fkind_flag) {
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 1000000000000000;
             } else if (sflush_flag) {
-                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 100000000;
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 100000000000000000;
             } else {  // has nothing, return high card
                 (*i).hand_points = 1 + getHighestRank(*i);
             }
