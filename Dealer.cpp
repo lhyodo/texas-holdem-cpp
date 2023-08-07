@@ -743,9 +743,28 @@ class Dealer {
     void assignPoints(Player &player) {
         bool pair_flag = isPair(player);
         bool dpair_flag = isDoublePair(player);
+        bool tkind_flag = isThreeKind(player);
+        bool straight_flag = isStraight(player);
+        bool flush_flag = isFlush(player);
+        bool fhouse_flag = isFullHouse(player);
+        bool fkind_flag = isFourKind(player);
+        bool sflush_flag = isStraightFlush(player);
         if (pair_flag) {
             player.hand_points = (1 + player.primary_cards[0].getRank()) * 10;
-            player.hand_points += 1 + player.secondary_cards[0].getRank();
+        } else if (dpair_flag) {
+            player.hand_points = (1 + player.primary_cards[0].getRank()) * 100;
+        } else if (tkind_flag) {
+            player.hand_points = (1 + player.primary_cards[0].getRank()) * 1000;
+        } else if (straight_flag) {
+            player.hand_points = (1 + player.primary_cards[0].getRank()) * 10000;
+        } else if (flush_flag) {
+            player.hand_points = (1 + player.primary_cards[0].getRank()) * 100000;
+        } else if (fhouse_flag) {
+            player.hand_points = (1 + player.primary_cards[0].getRank()) * 1000000;
+        } else if (fkind_flag) {
+            player.hand_points = (1 + player.primary_cards[0].getRank()) * 10000000;
+        } else if (sflush_flag) {
+            player.hand_points = (1 + player.primary_cards[0].getRank()) * 100000000;
         } else {  // has nothing, return high card
             player.hand_points = 1 + getHighestRank(player);
         }
