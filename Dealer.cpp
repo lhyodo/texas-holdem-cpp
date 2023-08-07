@@ -681,12 +681,31 @@ class Dealer {
             }
         }
 
-        if (num_of_pairs != 2) {
+        if (num_of_pairs < 2) {
             return false;
         }
-
+        bool tkind_flag = isThreeKind(player);
+        if (tkind_flag == true) {
+            return false;
+        }
+        bool straight_flag = isStraight(player);
+        if (straight_flag == true) {
+            return false;
+        }
         bool flush_flag = isFlush(player);
-        if (flush_flag = true) {
+        if (flush_flag == true) {
+            return false;
+        }
+        bool fhouse_flag = isFullHouse(player);
+        if (fhouse_flag == true) {
+            return false;
+        }
+        bool fkind_flag = isFourKind(player);
+        if (fkind_flag == true) {
+            return false;
+        }
+        bool sflush_flag = isStraightFlush(player);
+        if (sflush_flag == true) {
             return false;
         }
 
