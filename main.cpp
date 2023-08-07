@@ -246,7 +246,12 @@ int main() {
 
         // show hands
         std::cout << "Showing hands: \n";
-        
+        dealer.displayHand(dealer.players[0]);
+        dealer.displayHand(dealer.players[1]);
+        dealer.displayHand(dealer.players[2]);
+
+        // show board again
+        dealer.displayBoard();
 
         // calculate and decide winner
         dealer.assignPoints();
