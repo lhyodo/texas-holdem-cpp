@@ -263,9 +263,8 @@ class Dealer {
     }
 
     void roundReset() {
-        for (int i = 0; i < players.size(); ++i) {
-            players[i].active_bettor = true;
-        }
+        activeReset();
+        resetDeck();
     }
 
     // helper method
