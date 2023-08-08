@@ -14,15 +14,21 @@ int main() {
     dealer.initBlinds();
     dealer.setBlinds(50, 100);
 
-    dealer.players[0].hand[0] = 11;
-    dealer.players[0].hand[1] = 47;
-    dealer.players[1].hand[0] = 13;
-    dealer.players[1].hand[1] = 19;
-    dealer.board[0] = 33;
-    dealer.board[1] = 8;
-    dealer.board[2] = 35;
-    dealer.board[3] = 51;
-    dealer.board[4] = 14;
+    // formula for converting into raw form
+    // (rank - 2) * 4 + 
+    // 0 for club
+    // 1 for diamond
+    // 2 for hearts
+    // 3 for spades
+    dealer.players[0].hand[0] = 2;
+    dealer.players[0].hand[1] = 45;
+    dealer.players[1].hand[0] = 18;
+    dealer.players[1].hand[1] = 31;
+    dealer.board[0] = 50;
+    dealer.board[1] = 46;
+    dealer.board[2] = 37;
+    dealer.board[3] = 6;
+    dealer.board[4] = 38;
 
     dealer.displayHand(dealer.players[0]);
     dealer.displayBoard();
