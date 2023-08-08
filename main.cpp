@@ -20,8 +20,8 @@ int main() {
     while (dealer.getActivePlayerCount() > 1) {
         std::cout << "------------------------------\n";
         std::cout << "Big blind: " << dealer.big_blind->name << std::endl;
-        std::cout << "small blind: " << dealer.small_blind->name << std::endl;
-        std::cout << "starter: " << dealer.start->name << std::endl;
+        std::cout << "Small blind: " << dealer.small_blind->name << std::endl;
+        std::cout << "Starter: " << dealer.start->name << std::endl;
         std::cout << "------------------------------\n";
         dealer.takeBlinds();
         dealer.fillHands();
