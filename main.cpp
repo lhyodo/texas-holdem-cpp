@@ -159,10 +159,10 @@ int main() {
                     std::cout << "Enter check, raise #, or fold: ";
                     std::getline(std::cin, input_str);
                     while (input_str != "check" && input_str.find("raise") == std::string::npos && input_str != "fold") {
-                            std::cout << "Invalid input.\n";
-                            std::cout << "Enter check, raise #, or fold: ";
-                            std::getline(std::cin, input_str);
-                        }
+                        std::cout << "Invalid input.\n";
+                        std::cout << "Enter check, raise #, or fold: ";
+                        std::getline(std::cin, input_str);
+                    }
                     if (input_str == "check") {
                         dealer.check(*current);
                         std::cout << current->name << " has checked.\n";
@@ -206,10 +206,10 @@ int main() {
                     std::cout << "Enter check, raise #, or fold: ";
                     std::getline(std::cin, input_str);
                     while (input_str != "check" && input_str.find("raise") == std::string::npos && input_str != "fold") {
-                            std::cout << "Invalid input.\n";
-                            std::cout << "Enter check, raise #, or fold: ";
-                            std::getline(std::cin, input_str);
-                        }
+                        std::cout << "Invalid input.\n";
+                        std::cout << "Enter check, raise #, or fold: ";
+                        std::getline(std::cin, input_str);
+                    }
                     if (input_str == "check") {
                         dealer.check(*current);
                         std::cout << current->name << " has checked.\n";
@@ -253,10 +253,10 @@ int main() {
                     std::cout << "Enter check, raise #, or fold: ";
                     std::getline(std::cin, input_str);
                     while (input_str != "check" && input_str.find("raise") == std::string::npos && input_str != "fold") {
-                            std::cout << "Invalid input.\n";
-                            std::cout << "Enter check, raise #, or fold: ";
-                            std::getline(std::cin, input_str);
-                        }
+                        std::cout << "Invalid input.\n";
+                        std::cout << "Enter check, raise #, or fold: ";
+                        std::getline(std::cin, input_str);
+                    }
                     if (input_str == "check") {
                         dealer.check(*current);
                         std::cout << current->name << " has checked.\n";
@@ -317,6 +317,19 @@ int main() {
             win_msg += dealer.players[2].name + " wins.\n";
         }
         std::cout << win_msg;
+
+        for (auto i = dealer.players.begin(); i != dealer.players.end(); ++i) {
+            if (i->name == "Player") {
+                std::cout << "Your chips: " << i->chips << std::endl;
+            } else {
+                std::cout << i->name << "'s chips: " << i->chips << std::endl;
+            }
+        }
+        std::cout << "Enter \".\" to continue: ";
+        std::getline(std::cin, input_str);
+        while (input_str != ".") {
+            std::getline(std::cin, input_str);
+        }
 
         // end
         dealer.roundReset();
