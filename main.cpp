@@ -27,15 +27,15 @@ int main() {
         dealer.fillHands();
         dealer.fillBoard();
         // debug
-        dealer.players[0].hand[0] = 45;
-        dealer.players[0].hand[1] = 21;
-        dealer.players[1].hand[0] = 40;
-        dealer.players[1].hand[1] = 20;
-        dealer.board[0] = 2;
-        dealer.board[1] = 10;
-        dealer.board[2] = 39;
-        dealer.board[3] = 51;
-        dealer.board[4] = 12;
+        // dealer.players[0].hand[0] = 45;
+        // dealer.players[0].hand[1] = 21;
+        // dealer.players[1].hand[0] = 40;
+        // dealer.players[1].hand[1] = 20;
+        // dealer.board[0] = 2;
+        // dealer.board[1] = 10;
+        // dealer.board[2] = 39;
+        // dealer.board[3] = 51;
+        // dealer.board[4] = 12;
         // end debug
         dealer.displayHand(dealer.players[0]);
 
@@ -298,7 +298,7 @@ int main() {
         } while (current != head);
 
         // show hands
-        std::cout << "Showing hands: \n";
+        std::cout << "Showing cards: \n";
         dealer.displayHand(dealer.players[0]);
         dealer.displayHand(dealer.players[1]);
         dealer.displayHand(dealer.players[2]);
