@@ -18,17 +18,19 @@ int main() {
 
     int roundCounter = 1;
     while (dealer.getActivePlayerCount() > 1) {
+        std::cout << "------------------------------\n";
+        std::cout << "Big blind: " << dealer.big_blind->name << std::endl;
+        std::cout << "small blind: " << dealer.small_blind->name << std::endl;
+        std::cout << "starter: " << dealer.start->name << std::endl;
+        std::cout << "------------------------------\n";
+        dealer.takeBlinds();
         dealer.fillHands();
         dealer.displayHand(dealer.players[0]);
-        dealer.takeBlinds();
 
         // pre flop bets
         std::string input_str{};
         Player *current = dealer.start;
         Player *head = dealer.start;
-        std::cout << "Big blind: " << dealer.big_blind->name << std::endl;
-        std::cout << "small blind: " << dealer.small_blind->name << std::endl;
-        std::cout << "starter: " << dealer.start->name << std::endl;
         do {
             if (current->active_bettor == true) {
                 if (current->name.find("BOT") != std::string::npos) {
