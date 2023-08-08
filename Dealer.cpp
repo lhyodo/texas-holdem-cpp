@@ -354,6 +354,29 @@ class Dealer {
                 break;
             }
         }
+        // straight if A 2 3 4 5
+        if (ranks_sum[12] > 0 && ranks_sum[0] > 0 && ranks_sum[1] > 0 && ranks_sum[2] > 0 && ranks_sum[3] > 0) {
+            straight_flag = true;
+            highest_rank_in_straight = 3;
+            for (int i = HAND_SIZE + BOARD_SIZE - 1; i >= 0; --i) {
+                if (cards[i].getRank() == highest_rank_in_straight) {
+                    straight_flush_cards[0] = cards[i];
+                }
+                if (cards[i].getRank() == highest_rank_in_straight - 1) {
+                    straight_flush_cards[1] = cards[i];
+                }
+                if (cards[i].getRank() == highest_rank_in_straight - 2) {
+                    straight_flush_cards[2] = cards[i];
+                }
+                if (cards[i].getRank() == highest_rank_in_straight - 3) {
+                    straight_flush_cards[3] = cards[i];
+                }
+                if (cards[i].getRank() == 12) { // Rank 14 is Ace
+                    straight_flush_cards[4] = cards[i];
+                }
+            }
+            return true;
+        }
         if (straight_flag == false) {
             return false;
         }
