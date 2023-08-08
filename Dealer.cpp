@@ -884,7 +884,7 @@ class Dealer {
                 (*i).hand_points += (1 + (*i).secondary_cards[0].getRank()) * 100;
                 (*i).hand_points += (1 + (*i).secondary_cards[1].getRank()) * 10;
             } else if (straight_flag) {
-                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 1000000000;
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 100000000;
             } else if (flush_flag) {
                 (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 100000000000;
                 (*i).hand_points += (1 + (*i).primary_cards[1].getRank()) * 1000000;
