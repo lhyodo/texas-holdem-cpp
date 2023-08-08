@@ -75,6 +75,65 @@ class Dealer {
         return n;
     }
 
+
+
+    // helper function
+    void takeBet(Player &player, int val) {
+        if (player.chips <= val) {
+            player.pot += player.chips;
+            player.chips = 0;
+            player.all_in = true;
+            std::cout << "Player " << player.name << " has 0 chips and is all in!\n";
+        }
+        if (player.chips > val) {
+            player.pot += val;
+            player.chips -= val;
+        }
+    }
+
+    void check(Player &player) {
+    }
+
+    void call(Player &player) {
+        takeBet(player, bet_amt - player.pot);
+    }
+
+    void fold(Player &player) {
+        player.active_bettor = false;
+    }
+
+    void raise(Player &player, int val) {
+        bet_amt += val;
+        takeBet(player, bet_amt - player.pot);
+    }
+
+    void setBlinds(int small, int big) {
+        small_blind_value = small;
+        big_blind_value = big;
+    }
+
+    void takeBlinds() {
+        bet_amt = big_blind_value;
+        if (small_blind->chips <= small_blind_value) {
+            small_blind->pot = small_blind->chips;
+            small_blind->chips = 0;
+            small_blind->all_in = true;
+        }
+        if (small_blind->chips > small_blind_value) {
+            small_blind->pot = small_blind_value;
+            small_blind->chips -= small_blind_value;
+        }
+        if (big_blind->chips <= big_blind_value) {
+            big_blind->pot = big_blind->chips;
+            big_blind->chips = 0;
+            big_blind->all_in = true;
+        }
+        if (big_blind->chips > big_blind_value) {
+            big_blind->pot = big_blind_value;
+            big_blind->chips -= big_blind_value;
+        }
+        }
+
     void initBlinds() {
         if (players.size() <= 1) {
             std::cout << "setBlinds error\n";
@@ -102,60 +161,6 @@ class Dealer {
         big_blind_value *= 2;
     }
 
-    void activeReset() {
-        for (auto i = players.begin(); i != players.end(); ++i) {
-            i->active_bettor = true;
-        }
-    }
-
-    // helper function
-    void takeBet(Player &player, int val) {
-        if (player.chips <= val) {
-            player.pot += player.chips;
-            player.chips = 0;
-            player.all_in = true;
-            std::cout << "Player " << player.name << " has 0 chips and is all in!\n";
-        }
-        if (player.chips > val) {
-            player.pot += val;
-            player.chips -= val;
-        }
-    }
-
-    void check(Player &player) {
-        takeBet(player, bet_amt - player.pot);
-    }
-
-    void call(Player &player) {
-        takeBet(player, bet_amt - player.pot);
-    }
-
-    // foldStart only used at pre flop bets
-    // fold otherwise is just player.active_bettor
-    void foldStart(Player &player) {
-        if (player == *big_blind) {
-            takeBet(player, big_blind_value);
-        }
-        if (player == *small_blind) {
-            takeBet(player, small_blind_value);
-        }
-        player.active_bettor = false;
-    }
-
-    void fold(Player &player) {
-        player.active_bettor = false;
-    }
-
-    void raise(Player &player, int val) {
-        bet_amt += val;
-        takeBet(player, bet_amt - player.pot);
-    }
-
-    void setBlinds(int small, int big) {
-        small_blind_value = small;
-        big_blind_value = big;
-    }
-
     // void setCurrentBet(int n) {
     //     bet_amt = n;
     // }
@@ -181,7 +186,7 @@ class Dealer {
             std::cout << "------------------------------\n";
         } else {
             std::cout << "------------------------------\n";
-            std::cout << player.name <<"'s Hand: \n";
+            std::cout << player.name << "'s Hand: \n";
             for (int i = 0; i < player.HAND_SIZE; ++i) {
                 Card foo = player.hand[i];
                 std::cout << foo.getCardString() << std::endl;
@@ -262,9 +267,16 @@ class Dealer {
         std::cout << "==============================\n";
     }
 
+
+
     void roundReset() {
-        activeReset();
         resetDeck();
+        for (auto i = players.begin(); i != players.end(); ++i) {
+            i->active_bettor = true;
+            i->all_in = false;
+            i->pot = 0;
+            i->hand_points = 0;
+        }
     }
 
     // helper method
