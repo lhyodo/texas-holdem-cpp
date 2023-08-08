@@ -22,7 +22,7 @@ class Card {
     return raw_value;
   }
 
-  int getRank() {
+  unsigned long long int getRank() {
     return (raw_value / 4);
   }
   int getSuit() {
