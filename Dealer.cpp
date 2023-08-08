@@ -860,10 +860,10 @@ class Dealer {
             bool sflush_flag = isStraightFlush(*i);
             if (pair_flag) {
                 (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 1000;
-                (*i).hand_points += (1 + (*i).secondary_cards[0].getRank()) * 100;
-                (*i).hand_points += (1 + (*i).secondary_cards[1].getRank()) * 50;
-                (*i).hand_points += (1 + (*i).secondary_cards[2].getRank()) * 25;
-                (*i).hand_points += (1 + (*i).secondary_cards[3].getRank()) * 10;
+                (*i).hand_points += (1 + (*i).secondary_cards[0].getRank()) * 333;
+                (*i).hand_points += (1 + (*i).secondary_cards[1].getRank()) * 111;
+                (*i).hand_points += (1 + (*i).secondary_cards[2].getRank()) * 37;
+                (*i).hand_points += (1 + (*i).secondary_cards[3].getRank()) * 12;
             } else if (dpair_flag) {
                 (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 100000;
                 (*i).hand_points += (1 + (*i).primary_cards[3].getRank()) * 10;
