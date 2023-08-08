@@ -83,7 +83,7 @@ class Dealer {
             player.pot += player.chips;
             player.chips = 0;
             player.all_in = true;
-            std::cout << "Player " << player.name << " has 0 chips and is all in!\n";
+            std::cout << player.name << " has 0 chips and is all in!\n";
         }
         if (player.chips > val) {
             player.pot += val;
@@ -118,6 +118,7 @@ class Dealer {
             small_blind->pot = small_blind->chips;
             small_blind->chips = 0;
             small_blind->all_in = true;
+            std::cout << small_blind->name << " has 0 chips and is all in!\n";
         }
         if (small_blind->chips > small_blind_value) {
             small_blind->pot = small_blind_value;
@@ -127,6 +128,7 @@ class Dealer {
             big_blind->pot = big_blind->chips;
             big_blind->chips = 0;
             big_blind->all_in = true;
+            std::cout << big_blind->name << " has 0 chips and is all in!\n";
         }
         if (big_blind->chips > big_blind_value) {
             big_blind->pot = big_blind_value;
