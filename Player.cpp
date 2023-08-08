@@ -12,7 +12,7 @@ class Player {
     static const int HAND_SIZE = 2;
     std::string name{};
     int chips = 1000;
-    int hand_points{};
+    long long int hand_points{};
     int pot{};
     bool active_bettor = true;
     bool all_in = false;
