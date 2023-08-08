@@ -25,6 +25,18 @@ int main() {
         std::cout << "------------------------------\n";
         dealer.takeBlinds();
         dealer.fillHands();
+        dealer.fillBoard();
+        // debug
+        dealer.players[0].hand[0] = 45;
+        dealer.players[0].hand[1] = 21;
+        dealer.players[1].hand[0] = 40;
+        dealer.players[1].hand[1] = 20;
+        dealer.board[0] = 2;
+        dealer.board[1] = 10;
+        dealer.board[2] = 39;
+        dealer.board[3] = 51;
+        dealer.board[4] = 12;
+        // end debug
         dealer.displayHand(dealer.players[0]);
 
         // pre flop bets
@@ -143,7 +155,7 @@ int main() {
             current = current->next;
         } while (current != head);
 
-        dealer.fillBoard();
+        
         dealer.displayFlop();
         // post flop bets
         current = dealer.start;
