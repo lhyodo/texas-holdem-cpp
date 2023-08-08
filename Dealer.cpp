@@ -883,8 +883,12 @@ class Dealer {
                 (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 1000000000000000;
             } else if (sflush_flag) {
                 (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 100000000000000000;
-            } else {  // has nothing, return high card
-                (*i).hand_points = 1 + getHighestRank(*i);
+            } else {  // has nothing
+                (*i).hand_points = 1 + (*i).secondary_cards[0].getRank() * 100;
+                (*i).hand_points = 1 + (*i).secondary_cards[1].getRank() * 50;
+                (*i).hand_points = 1 + (*i).secondary_cards[2].getRank() * 25;
+                (*i).hand_points = 1 + (*i).secondary_cards[3].getRank() * 12;
+                (*i).hand_points = 1 + (*i).secondary_cards[4].getRank() * 6;
             }
         }
     }
