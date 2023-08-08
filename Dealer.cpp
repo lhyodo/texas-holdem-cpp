@@ -788,6 +788,50 @@ class Dealer {
         return true;
     }
 
+    bool hasNothing(Player &player) {
+        Card combined[player.HAND_SIZE + BOARD_SIZE]{};
+        combineCards(player, combined);
+        bool pair_flag = isPair(player);
+        if (pair_flag == true) {
+            return false;
+        }
+        bool dpair_flag = isDoublePair(player);
+        if (dpair_flag == true) {
+            return false;
+        }
+        bool tkind_flag = isThreeKind(player);
+        if (tkind_flag == true) {
+            return false;
+        }
+        bool straight_flag = isStraight(player);
+        if (straight_flag == true) {
+            return false;
+        }
+        bool flush_flag = isFlush(player);
+        if (flush_flag == true) {
+            return false;
+        }
+        bool fhouse_flag = isFullHouse(player);
+        if (fhouse_flag == true) {
+            return false;
+        }
+        bool fkind_flag = isFourKind(player);
+        if (fkind_flag == true) {
+            return false;
+        }
+        bool sflush_flag = isStraightFlush(player);
+        if (sflush_flag == true) {
+            return false;
+        }
+        for (int i = player.HAND_SIZE + BOARD_SIZE - 1, secondary_cards_index = 0; i >= 0; --i) {
+            if (secondary_cards_index == 5) {
+                break;
+            }
+                player.secondary_cards[secondary_cards_index++] = combined[i];
+        }
+        return true;
+    }
+
     bool isDoublePair(Player &player) {
         // this function is derived from isPair
         Card combined[player.HAND_SIZE + BOARD_SIZE]{};
@@ -887,6 +931,7 @@ class Dealer {
 
     void assignPoints() {
         for (auto i = players.begin(); i != players.end(); ++i) {
+            bool nothing_flag = hasNothing(*i);
             bool pair_flag = isPair(*i);
             bool dpair_flag = isDoublePair(*i);
             bool tkind_flag = isThreeKind(*i);
@@ -895,6 +940,13 @@ class Dealer {
             bool fhouse_flag = isFullHouse(*i);
             bool fkind_flag = isFourKind(*i);
             bool sflush_flag = isStraightFlush(*i);
+            if (nothing_flag) {
+                (*i).hand_points = 1 + (*i).secondary_cards[0].getRank() * 100;
+                (*i).hand_points += 1 + (*i).secondary_cards[1].getRank() * 50;
+                (*i).hand_points += 1 + (*i).secondary_cards[2].getRank() * 25;
+                (*i).hand_points += 1 + (*i).secondary_cards[3].getRank() * 12;
+                (*i).hand_points += 1 + (*i).secondary_cards[4].getRank() * 6;
+            }
             if (pair_flag) {
                 (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 1000;
                 (*i).hand_points += (1 + (*i).secondary_cards[0].getRank()) * 333;
@@ -924,12 +976,6 @@ class Dealer {
                 (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 1000000000000000;
             } else if (sflush_flag) {
                 (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 100000000000000000;
-            } else {  // has nothing
-                (*i).hand_points = 1 + (*i).secondary_cards[0].getRank() * 100;
-                (*i).hand_points += 1 + (*i).secondary_cards[1].getRank() * 50;
-                (*i).hand_points += 1 + (*i).secondary_cards[2].getRank() * 25;
-                (*i).hand_points += 1 + (*i).secondary_cards[3].getRank() * 12;
-                (*i).hand_points += 1 + (*i).secondary_cards[4].getRank() * 6;
             }
         }
     }
