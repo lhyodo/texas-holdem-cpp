@@ -1,12 +1,28 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <locale>
 
 #include "Card.cpp"
 #include "Dealer.cpp"
 #include "Player.cpp"
 #include "QuickSort.cpp"
+
+class comma_numpunct : public std::numpunct<char> {
+   protected:
+    virtual char do_thousands_sep() const {
+        return ',';
+    }
+
+    virtual std::string do_grouping() const {
+        return "\03";
+    }
+};
+
 int main() {
+    std::locale comma_locale(std::locale(), new comma_numpunct());
+    std::cout.imbue(comma_locale);
+
     Dealer dealer{};
 
     // player and linked list initialization
@@ -307,6 +323,8 @@ int main() {
 
         // calculate and decide winner
         dealer.assignPoints();
+        int foo = dealer.players[0].name.length();
+        int goo = dealer.players[1].name.length();
         for (auto i = dealer.players.begin(); i != dealer.players.end(); ++i) {
             std::cout << (*i).name << "'s hand points: " << (*i).hand_points << std::endl;
         }
@@ -390,8 +408,6 @@ int main() {
         while (input_str != ".") {
             std::getline(std::cin, input_str);
         }
-
-        
 
         // end
         dealer.roundReset();
