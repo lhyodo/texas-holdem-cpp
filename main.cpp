@@ -316,10 +316,22 @@ int main() {
 
         if (dealer.players[0].hand_points > dealer.players[1].hand_points && dealer.players[0].hand_points > dealer.players[2].hand_points) {
             win_msg = "You win!\n";
+            int all_pot = 0;
+            for (auto i = dealer.players.begin(); i != dealer.players.end(); ++i) {
+                dealer.players[0].chips += i->pot;
+            }
         } else if (dealer.players[1].hand_points > dealer.players[0].hand_points && dealer.players[1].hand_points > dealer.players[2].hand_points) {
             win_msg = dealer.players[1].name + " wins.\n";
+            int all_pot = 0;
+            for (auto i = dealer.players.begin(); i != dealer.players.end(); ++i) {
+                dealer.players[1].chips += i->pot;
+            }
         } else if (dealer.players[2].hand_points > dealer.players[0].hand_points && dealer.players[2].hand_points > dealer.players[1].hand_points) {
             win_msg = dealer.players[2].name + " wins.\n";
+            int all_pot = 0;
+            for (auto i = dealer.players.begin(); i != dealer.players.end(); ++i) {
+                dealer.players[2].chips += i->pot;
+            }
         } else if (dealer.players[0].hand_points == dealer.players[1].hand_points && dealer.players[0].hand_points == dealer.players[2].hand_points) {
             win_msg = "You win!\n";
             win_msg += dealer.players[1].name + " wins.\n";
@@ -347,6 +359,13 @@ int main() {
         std::getline(std::cin, input_str);
         while (input_str != ".") {
             std::getline(std::cin, input_str);
+        }
+
+        // if 0 chips, knocked_out = true
+        for (auto i = dealer.players.begin(); i != dealer.players.end(); ++i) {
+            if (i->chips <= 0) {
+                i->knocked_out = true;
+            }
         }
 
         // end
