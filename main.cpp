@@ -44,7 +44,7 @@ int main() {
         Player *current = dealer.start;
         Player *head = dealer.start;
         do {
-            if (current->active_bettor == true) {
+            if (current->active_bettor == true && current->knocked_out == false) {
                 if (current->name.find("BOT") != std::string::npos) {
                     if (current == dealer.big_blind && dealer.bet_amt == dealer.big_blind_value) {
                         dealer.check(*current);
@@ -155,13 +155,12 @@ int main() {
             current = current->next;
         } while (current != head);
 
-        
         dealer.displayFlop();
         // post flop bets
         current = dealer.start;
         head = dealer.start;
         do {
-            if (current->active_bettor == true) {
+            if (current->active_bettor == true && current->knocked_out == false) {
                 if (current->name.find("BOT") != std::string::npos) {
                     if (dealer.bet_amt == current->pot) {
                         dealer.check(*current);
@@ -208,7 +207,7 @@ int main() {
         current = dealer.start;
         head = dealer.start;
         do {
-            if (current->active_bettor == true) {
+            if (current->active_bettor == true && current->knocked_out == false) {
                 if (current->name.find("BOT") != std::string::npos) {
                     if (dealer.bet_amt == current->pot) {
                         dealer.check(*current);
@@ -255,7 +254,7 @@ int main() {
         current = dealer.start;
         head = dealer.start;
         do {
-            if (current->active_bettor == true) {
+            if (current->active_bettor == true && current->knocked_out == false) {
                 if (current->name.find("BOT") != std::string::npos) {
                     if (dealer.bet_amt == current->pot) {
                         dealer.check(*current);
@@ -316,7 +315,6 @@ int main() {
 
         if (dealer.players[0].hand_points > dealer.players[1].hand_points && dealer.players[0].hand_points > dealer.players[2].hand_points) {
             win_msg = "You win!\n";
-            int all_pot = 0;
             for (auto i = dealer.players.begin(); i != dealer.players.end(); ++i) {
                 dealer.players[0].chips += i->pot;
             }
@@ -336,30 +334,38 @@ int main() {
             win_msg = "You win!\n";
             win_msg += dealer.players[1].name + " wins.\n";
             win_msg += dealer.players[2].name + " wins.\n";
+            for (auto i = dealer.players.begin(); i != dealer.players.end(); ++i) {
+                i->chips += i->pot;
+            }
         } else if (dealer.players[0].hand_points == dealer.players[1].hand_points) {
             win_msg = "You win!\n";
             win_msg += dealer.players[1].name + " wins.\n";
+            int all_pot = 0;
+            for (auto i = dealer.players.begin(); i != dealer.players.end(); ++i) {
+                all_pot += i->pot;
+            }
+            dealer.players[0].chips += all_pot / 2;
+            dealer.players[1].chips += all_pot / 2;
         } else if (dealer.players[0].hand_points == dealer.players[2].hand_points) {
             win_msg = "You win!\n";
             win_msg += dealer.players[2].name + " wins.\n";
+            int all_pot = 0;
+            for (auto i = dealer.players.begin(); i != dealer.players.end(); ++i) {
+                all_pot += i->pot;
+            }
+            dealer.players[0].chips += all_pot / 2;
+            dealer.players[2].chips += all_pot / 2;
         } else if (dealer.players[1].hand_points == dealer.players[2].hand_points) {
             win_msg = dealer.players[1].name + " wins.\n";
             win_msg += dealer.players[2].name + " wins.\n";
+            int all_pot = 0;
+            for (auto i = dealer.players.begin(); i != dealer.players.end(); ++i) {
+                all_pot += i->pot;
+            }
+            dealer.players[1].chips += all_pot / 2;
+            dealer.players[2].chips += all_pot / 2;
         }
         std::cout << win_msg;
-
-        for (auto i = dealer.players.begin(); i != dealer.players.end(); ++i) {
-            if (i->name == "Player") {
-                std::cout << "Your chips: " << i->chips << std::endl;
-            } else {
-                std::cout << i->name << "'s chips: " << i->chips << std::endl;
-            }
-        }
-        std::cout << "Enter \".\" to continue: ";
-        std::getline(std::cin, input_str);
-        while (input_str != ".") {
-            std::getline(std::cin, input_str);
-        }
 
         // if 0 chips, knocked_out = true
         for (auto i = dealer.players.begin(); i != dealer.players.end(); ++i) {
@@ -368,12 +374,36 @@ int main() {
             }
         }
 
+        for (auto i = dealer.players.begin(); i != dealer.players.end(); ++i) {
+            if (i->name == "Player") {
+                if (i->knocked_out == false) {
+                    std::cout << "Your chips: " << i->chips << std::endl;
+                }
+            } else {
+                if (i->knocked_out == false) {
+                    std::cout << i->name << "'s chips: " << i->chips << std::endl;
+                }
+            }
+        }
+        std::cout << "Enter \".\" to continue: ";
+        std::getline(std::cin, input_str);
+        while (input_str != ".") {
+            std::getline(std::cin, input_str);
+        }
+
+        
+
         // end
         dealer.roundReset();
         dealer.advanceBlinds();
         ++roundCounter;
         if (roundCounter % 5 == 0) {
             dealer.raiseBlinds();
+        }
+    }
+    for (auto i = dealer.players.begin(); i != dealer.players.end(); ++i) {
+        if (i->knocked_out == false) {
+            std::cout << i->name << " is the final winner!!!\n";
         }
     }
 
