@@ -964,39 +964,39 @@ class Dealer {
             bool fkind_flag = isFourKind(*i);
             bool sflush_flag = isStraightFlush(*i);
             if (nothing_flag) {
-                (*i).hand_points = (1 + (*i).secondary_cards[0].getRank()) * 100;
-                (*i).hand_points += (1 + (*i).secondary_cards[1].getRank()) * 33;
-                (*i).hand_points += (1 + (*i).secondary_cards[2].getRank()) * 11;
-                (*i).hand_points += (1 + (*i).secondary_cards[3].getRank()) * 4;
+                (*i).hand_points = (1 + (*i).secondary_cards[0].getRank()) * 3906250;
+                (*i).hand_points += (1 + (*i).secondary_cards[1].getRank()) * 78125;
+                (*i).hand_points += (1 + (*i).secondary_cards[2].getRank()) * 1562;
+                (*i).hand_points += (1 + (*i).secondary_cards[3].getRank()) * 31;
                 (*i).hand_points += (1 + (*i).secondary_cards[4].getRank());
             }
             if (pair_flag) {
-                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 1000;
-                (*i).hand_points += (1 + (*i).secondary_cards[0].getRank()) * 333;
-                (*i).hand_points += (1 + (*i).secondary_cards[1].getRank()) * 66;
-                (*i).hand_points += (1 + (*i).secondary_cards[2].getRank()) * 22;
-                (*i).hand_points += (1 + (*i).secondary_cards[3].getRank()) * 7;
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 78125000;
+                (*i).hand_points += (1 + (*i).secondary_cards[0].getRank()) * 1562500;
+                (*i).hand_points += (1 + (*i).secondary_cards[1].getRank()) * 31250;
+                (*i).hand_points += (1 + (*i).secondary_cards[2].getRank()) * 625;
+                (*i).hand_points += (1 + (*i).secondary_cards[3].getRank());
             } else if (dpair_flag) {
-                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 10000;
-                (*i).hand_points += (1 + (*i).primary_cards[3].getRank()) * 100;
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 1562500000;
+                (*i).hand_points += (1 + (*i).primary_cards[3].getRank()) * 10000;
                 (*i).hand_points += (1 + (*i).secondary_cards[0].getRank());
             } else if (tkind_flag) {
-                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 10000000;
-                (*i).hand_points += (1 + (*i).secondary_cards[0].getRank()) * 100;
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 31250000000;
+                (*i).hand_points += (1 + (*i).secondary_cards[0].getRank()) * 10000;
                 (*i).hand_points += (1 + (*i).secondary_cards[1].getRank());
             } else if (straight_flag) {
-                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 1000000000;
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 625000000000;
             } else if (flush_flag) {
-                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 100000000000;
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 12500000000000;
                 (*i).hand_points += (1 + (*i).primary_cards[1].getRank()) * 1000000;
                 (*i).hand_points += (1 + (*i).primary_cards[2].getRank()) * 10000;
                 (*i).hand_points += (1 + (*i).primary_cards[3].getRank()) * 100;
                 (*i).hand_points += (1 + (*i).primary_cards[4].getRank());
             } else if (fhouse_flag) {
-                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 10000000000000;
-                (*i).hand_points += (1 + (*i).primary_cards[4].getRank()) * 10;
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 250000000000000;
+                (*i).hand_points += (1 + (*i).primary_cards[4].getRank());
             } else if (fkind_flag) {
-                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 1000000000000000;
+                (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 5000000000000000;
             } else if (sflush_flag) {
                 (*i).hand_points = (1 + (*i).primary_cards[0].getRank()) * 100000000000000000;
             }
